@@ -13,19 +13,26 @@ class SQLDatabase():
     def __init__(self, database_arg=':memory'):
         self.database_arg = database_arg
         self.depth = 0
+        self.conn = sqlite3.connect(self.database_arg, uri=True, check_same_thread=True)
+        self.cur = self.conn.cursor()
     
+    # def __enter__(self):
+    #     if self.depth == 0:
+    #         self.conn = sqlite3.connect(self.database_arg, uri=True, check_same_thread=False)
+    #         self.cur = self.conn.cursor()
+    #     self.depth += 1
+    
+    # def __exit__(self, exc_type, exc_value, tb):
+    #     if exc_type is not None:
+    #         raise exc_value
+    #     self.depth -= 1
+    #     if self.depth == 0:
+    #         self.conn.close()
+
     def __enter__(self):
-        if self.depth == 0:
-            self.conn = sqlite3.connect(self.database_arg, uri=True, check_same_thread=False)
-            self.cur = self.conn.cursor()
-        self.depth += 1
-    
-    def __exit__(self, exc_type, exc_value, tb):
-        if exc_type is not None:
-            raise exc_value
-        self.depth -= 1
-        if self.depth == 0:
-            self.conn.close()
+        pass
+    def __exit__(self, *args):
+        pass
 
     # SQLite 3 does not natively support multiple commands in a single statement
     # Using this handler restores this functionality
@@ -49,7 +56,7 @@ class SQLDatabase():
     # Sets up the database
     # Default admin password
     def database_setup(self, admin_password='admin'):
-        with self:
+        # with self:
             # Clear the database if needed
             self.execute("DROP TABLE IF EXISTS Users")
             self.execute("DROP TABLE IF EXISTS Sessions")
