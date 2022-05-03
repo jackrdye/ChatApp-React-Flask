@@ -1,10 +1,12 @@
 import React, { StrictMode, useState } from 'react'
+import { useNavigate } from "react-router-dom";
 import { Form, Button } from "react-bootstrap"
 import Cookies from 'universal-cookie'
 const cookies = new Cookies()
 
  
 function Login() {
+  const redirect = useNavigate()
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
@@ -28,6 +30,7 @@ function Login() {
         alert(`Hello ${username} You have successfully logged in`)
         setUsername("")
         setPassword("")
+        redirect("/messages")
 
       // Login Failed
       } else if (response['result'] === "Invalid Credentials") {
