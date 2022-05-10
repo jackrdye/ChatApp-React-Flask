@@ -34,6 +34,7 @@ del db
 # key_functions.get_friends_keys(db, "jack")
 # print(friend_functions.get_friend_list(db, 'jack'))
 
+
 @app.before_request
 def load_db():
     if getattr(t, 'db', None) is None:
@@ -56,7 +57,7 @@ def register():
     data = request.get_json()
     username = data['username']
     password = data['password']
-
+    
     return account_functions.register(t.db, username, password)
 
 # @app.route("/api/get_username_from_session", methods=["GET"])
