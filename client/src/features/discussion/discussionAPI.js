@@ -1,10 +1,10 @@
-export const fetchAllPostsAPI = async (sortOrder, tags) => {
+export const fetchAllPostsAPI = async (searchRequests) => {
   const response = await fetch('/api/get_all_posts', {
     method: "GET",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({sortOrder: sortOrder, tags: tags})
+    body: JSON.stringify(searchRequests)// {sortOrder: sortOrder, tags: tags}
   }
   ) 
   
@@ -27,13 +27,13 @@ export const fetchPostDetailAPI = async (postID) => {
   return response
 }
 
-export const createPostAPI = async (title, body, tags) => {
+export const createPostAPI = async (postDetails) => {
   const response = await fetch("/api/create_post", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({title: title, body: body, tags: tags})
+    body: JSON.stringify(postDetails) // {title: title, body: body, tags: tags}
   })
 
   // Validate
