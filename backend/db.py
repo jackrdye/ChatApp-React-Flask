@@ -1,5 +1,6 @@
 import sqlite3
 import hashlib
+import math
 
 # This class is a simple handler for all of our SQL database actions
 # Practicing a good separation of concerns, we should only ever call 
@@ -10,10 +11,11 @@ class SQLDatabase():
         Our SQL Database
     '''
     # Get the database running
-    def __init__(self, database_arg=':memory'):
+    def __init__(self, database_arg=':memory:'):
         self.database_arg = database_arg
         self.depth = 0
         self.conn = sqlite3.connect(self.database_arg, uri=True, check_same_thread=True)
+        self.conn.create_function('EXP', 1, math.exp)
         self.cur = self.conn.cursor()
     
     # def __enter__(self):
@@ -62,6 +64,11 @@ class SQLDatabase():
             self.execute("DROP TABLE IF EXISTS Sessions")
             self.execute("DROP TABLE IF EXISTS Friends")
             self.execute("DROP TABLE IF EXISTS Messages")
+            self.execute("DROP TABLE IF EXISTS GroupMessages")
+            self.execute("DROP TABLE IF EXISTS Posts")
+            self.execute("DROP TABLE IF EXISTS Tags")
+            self.execute("DROP TABLE IF EXISTS PostTags")
+            self.execute("DROP TABLE IF EXISTS Comments")
             self.commit()
 
             # Create the users table
@@ -96,7 +103,51 @@ class SQLDatabase():
                 verify_key TEXT
             )""")
 
+            self.execute("""CREATE TABLE GroupMessages(
+                message_group TEXT,
+                sender TEXT,
+                message TEXT,
+                createdOn DATETIME
+            )""")
+
+            self.execute("""CREATE TABLE Posts(
+                postID INTEGER Primary Key AUTOINCREMENT,
+                title TEXT,
+                author TEXT,
+                body TEXT,
+                createdOn DATETIME,
+                upvotes INTEGER DEFAULT 0
+            )""")
+
+            self.execute("""CREATE TABLE Tags(
+                tagID INTEGER Primary Key AUTOINCREMENT,
+                tag TEXT
+            )""")
+
             self.commit()
+
+            self.execute("""CREATE TABLE PostTags(
+                postID INTEGER,
+                tagID INTEGER, 
+                FOREIGN KEY(postID) REFERENCES Posts(postID),
+                FOREIGN KEY(tagID) REFERENCES Tags(tagID)
+            )""")
+
+            self.commit()
+
+            self.execute("""CREATE TABLE Comments(
+                commentID INTEGER PRIMARY KEY,
+                postID INTEGER,
+                parentCommentID INTEGER,
+                author TEXT,
+                body TEXT,
+                createdOn DATETIME,
+                FOREIGN KEY(postID) REFERENCES Posts(postID),
+                FOREIGN KEY(parentCommentID) REFERENCES Comments(commentID)
+            )""")
+
+            self.commit()
+
 
             print("Database has been established")
 
