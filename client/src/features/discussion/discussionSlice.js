@@ -41,15 +41,28 @@ export const discussionSlice = createSlice({
   name: 'discussion',
   initialState: initialState,
   reducers: {  
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchAllPosts.fulfilled, (state, action) => {
+        if (action.payload.result === "success" && state.status === "idle") {
+          state.posts = action.payload.posts
+          state.status = "loaded"
+        }
+      })
+      .addCase(fetchPostDetail.fulfilled, (state, action) => {
+        state.currentPost = action.payload.post
+      })
+
+      .addCase(createPost.fulfilled, (state, action) => {
+        if (action.payload.result === "success") {
+          state.posts.unshift({postID: action.payload.postID, title: action.payload.title})
+        }
+      })
+
+
+
   }
-  // extraReducers: (builder) => {
-  //   builder
-  //     .addCase()
-
-  //     .addCase()
-
-
-  // }
 
 
 

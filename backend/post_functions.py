@@ -86,7 +86,7 @@ def create_post(db, title, author, body, tags):
     
     db.commit()
 
-    return {'result': 'success'}
+    return {'result': 'success', 'postID': postID, 'title': title}
 
 def get_post_list(db, sort_order, tags):
     """

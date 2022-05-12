@@ -27,6 +27,11 @@ friend_functions.accept_friend_request(db, 'b', 'jack', 'accept')
 # message_functions.send_message(db, 'a', 'jack', 'Hey jack its a')
 # message_functions.get_messages(db, 'jack')
 account_functions.register(db, 'c', 'c')
+print(post_functions.create_post(db, "post 1", "jack", "this is a test from j", []))
+print(post_functions.create_post(db, "post 2", "haowen", "this is a test from h", []))
+print(post_functions.get_post_list(db, "relevant", []))
+
+
 
 del db
 
@@ -103,7 +108,7 @@ def create_post():
 
     
 
-@app.route("/api/get_all_posts", methods=["GET"])
+@app.route("/api/get_all_posts", methods=["POST"])
 def get_post_list():
     """
     Expected JSON:
@@ -123,7 +128,7 @@ def get_post_list():
     }]
     """
 
-@app.route("/api/get_post", methods=["GET"])
+@app.route("/api/get_post", methods=["POST"])
 def get_post():
     """
     Expected JSON:
@@ -215,7 +220,7 @@ def send_group_message():
     return group_message_functions.send_message(t.db, group, sender, message)
 
 
-@app.route("/api/get_group_messages", methods=["GET"])
+@app.route("/api/get_group_messages", methods=["POST"])
 def get_group_messages():
     """
     Expected json:
@@ -231,7 +236,7 @@ def get_group_messages():
         page = int(request.get_json()['page'])
     except:
         page = 1
-
+    print(page)
     return group_message_functions.get_messages(t.db, user, group, page_no=page)
 
 

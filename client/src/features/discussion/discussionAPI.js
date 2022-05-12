@@ -1,6 +1,6 @@
 export const fetchAllPostsAPI = async (searchRequests) => {
   const response = await fetch('/api/get_all_posts', {
-    method: "GET",
+    method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
@@ -10,12 +10,12 @@ export const fetchAllPostsAPI = async (searchRequests) => {
   
   // Validate [{postID, title}]
   
-  return response.posts
+  return response.json()
 }
 
 export const fetchPostDetailAPI = async (postID) => {
   const response = await fetch("/api/get_post", {
-    method: "GET", 
+    method: "POST", 
     headers: {
       "Content-Type": "application/json"
     },
@@ -24,7 +24,7 @@ export const fetchPostDetailAPI = async (postID) => {
 
   // Validate
 
-  return response
+  return response.json()
 }
 
 export const createPostAPI = async (postDetails) => {
@@ -38,7 +38,7 @@ export const createPostAPI = async (postDetails) => {
 
   // Validate
 
-  return response
+  return response.json()
 }
 
 export const upVotePost = async (postID) => {
@@ -50,7 +50,7 @@ export const upVotePost = async (postID) => {
     body: JSON.stringify({postID: postID})
   })
 
-  return response // not sure what to return 
+  return response.json() // not sure what to return 
 }
 
 export const downVotePost = async (postID) => {
@@ -62,7 +62,7 @@ export const downVotePost = async (postID) => {
     body: JSON.stringify({postID: postID})
   })
 
-  return response // not sure what to return 
+  return response.json() // not sure what to return 
 }
 
 export const answerPost = async (postID, body) => {
@@ -74,5 +74,5 @@ export const answerPost = async (postID, body) => {
     body: JSON.stringify({postID: postID, body: body})
   })
 
-  return response
+  return response.json()
 }

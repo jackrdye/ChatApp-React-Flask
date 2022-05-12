@@ -24,7 +24,7 @@ function Login() {
         alert(`Hello ${username} You have successfully logged in`)
         setUsername("")
         setPassword("")
-        redirect("/courseHome")
+        redirect("/discussion")
       } else if (response.result === "Invalid Credentials") {
         // Login Failed
         setPassword("")

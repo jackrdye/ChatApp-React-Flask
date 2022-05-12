@@ -18,13 +18,13 @@ def send_message(db, group, sender, message):
     db.execute(sql_cmd, params={'sender': sender, 'message': message, 'group': group })
     db.commit()
 
-    return {'result': 'success', 'sender': sender}
+    return {'result': 'success', 'sender': sender, 'message': message}
 
-def get_messages(db, group, page_no = 1):
+def get_messages(db, user, group, page_no = 1):
     """
         Get all messages sent to group
 
-        Return List of messages - [(sender, message), (sender, message)]
+        Return List of messages - [(sender, message), (sender, message)] ------ EDIT - make it return [{sender:..., message:...}, ...]
     """
     if group == None:
         return {'result': 'failed', 'error': 'Invalid session key', 'messages': []}

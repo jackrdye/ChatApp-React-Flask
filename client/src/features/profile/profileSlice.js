@@ -9,8 +9,6 @@ if (initialState === null) {
     isAdmin: false
   }
 } 
-console.log(initialState)
-
 
 // Async Thunks - 
 export const login = createAsyncThunk(
@@ -38,11 +36,9 @@ export const profileSlice = createSlice({
     loggedIn: (state) => {state.isLoggedIn = true},
     loggedOut: (state) => {state.isLoggedIn = false},
     resetProfile: (state) => {
-      state = {
-      isLoggedIn: false,
-      isAdmin: false
-    }
-    localStorage.setItem("profile", JSON.stringify(state))
+      state.isLoggedIn = false
+      state.isAdmin = false
+      localStorage.setItem("profile", JSON.stringify(state))
     }
   },
   extraReducers: (builder) => {

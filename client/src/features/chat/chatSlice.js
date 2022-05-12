@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchAllChatsAPI, sendGroupMessageAPI, recieveGroupMessagesAPI } from "./chatAPI";
 
 const initialState = {
-  chats: [],
+  messages: [],
   status: 'idle'
 }
 
@@ -12,15 +12,15 @@ export const fetchAllChats = createAsyncThunk(
   'chat/fetchAllChats',
   async () => {
     const response = await fetchAllChatsAPI()
-    return response.data
+    return response
   }
-)
+) 
 
 export const sendGroupMessage = createAsyncThunk(
   'chat/sendGroupMessage',
-  async (groupName, message) => {
-    const response = await sendGroupMessageAPI(groupName, message)
-    return response.data
+  async ({messageDetails}) => {
+    const response = await sendGroupMessageAPI(messageDetails)
+    return response
   }
 )
 
@@ -28,7 +28,7 @@ export const recieveGroupMessages = createAsyncThunk(
   'chat/recieveGroupMessage',
   async (groupName) => {
     const response = await recieveGroupMessagesAPI(groupName)
-    return response.data
+    return response
   }
 )
 
@@ -44,21 +44,21 @@ export const chatSlice = createSlice({
   extraReducers: (builder) => {
     builder
       // Handle fetchAllChats
-      .addCase(fetchAllChats.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(fetchAllChats.fulfilled, (state, action) => {
-        state.status = 'complete';
-        state.chats = action.payload // should make chats: [] = chats: [{name: info222, ...}, {name...}]
-      })
+      // .addCase(fetchAllChats.pending, (state) => {
+      //   state.status = 'loading';
+      // })
+      // .addCase(fetchAllChats.fulfilled, (state, action) => {
+      //   state.status = 'complete';
+      //   state.chats = action.payload // should make chats: [] = chats: [{name: info222, ...}, {name...}]
+      // })
       // Handle sendGroupMessage
       .addCase(sendGroupMessage.fulfilled, (state, action) => {
-        state.chats.push(action.payload)
+        state.messages.push({sender: action.payload.sender, message: action.payload.message})
         // TODO: - Update correct group with new message 
       })
       // Handle recieveGroupMessage
       .addCase(recieveGroupMessages.fulfilled, (state, action) => {
-        // state.chats
+        state.messages.push(action.payload)
         // TODO: - Update correct group with new messages
       })
           

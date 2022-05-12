@@ -1,20 +1,36 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { fetchAllPosts } from './discussionSlice'
 import { resetProfile } from '../profile/profileSlice'
+import { Container, Col, Row } from 'react-bootstrap'
+import CourseTab from './CourseTab'
+import PostList from './PostList'
+import Post from './Post'
+import AskQuestion from './AskQuestion'
 
 
 
 function Discussion() {
   const dispatch = useDispatch()
   const redirect = useNavigate()
-  const [sortBy, setSortBy] = useState("relevance") // relevance || latest || earliest || upvotes
+  const [componentHeight, setComponentHeight] = useState(window.innerHeight - 56)
+
+  const discussion = useSelector(state => state.discussion)
+  const currentPost = useSelector(state => state.discussion.currentPost)
+
+  const [displayAskQuestion, setDisplayAskQuestion] = useState(false)
+
+  const [sortBy, setSortBy] = useState("relevant") // relevant || latest || earliest || upvotes
   const [tags, setTags] = useState([])
 
   useEffect(() => {
+    console.log(discussion)
+  }, [discussion])
+
+  useEffect(() => {
     dispatch(fetchAllPosts({
-      sortOrder: sortBy, 
+      sort_order: sortBy, 
       tags: tags})
     )
     .unwrap()
@@ -29,14 +45,23 @@ function Discussion() {
       alert("An error occured please try again or refresh the page")
       console.log(error)
     })
-  
-  })
+  }, [])
 
 
   return (
-    <div>
-
-    </div>
+    <Container fluid className='border-top border-dark' style={{height: `${componentHeight}px`}}> {/*style={{height: `${componentHeight}px`}}*/}
+      <Row className=' h-100'>
+        <Col sm={2} xs={2} className='border-end border-dark p-0 m-0'>
+          <CourseTab setDisplayAskQuestion={setDisplayAskQuestion}/>
+        </Col>
+        <Col sm={3} xs={3} className='border-end border-dark p-0 m-0'>
+          <PostList setDisplayAskQuestion={setDisplayAskQuestion}/>
+        </Col>
+        <Col className="border">
+          {displayAskQuestion ? <AskQuestion setDisplayAskQuestion={setDisplayAskQuestion}/> : <Post/>} {/* Or ask question */}
+        </Col>
+      </Row>
+    </Container>
   )
 }
 

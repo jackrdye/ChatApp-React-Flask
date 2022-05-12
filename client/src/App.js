@@ -14,7 +14,7 @@ function App() {
       <NavigationBar/>
 
       <Routes>
-        <Route index path="/" element={<> </>}/>
+        <Route index path="/" element={<></>}/>
         <Route index path="/login" element={<Login/>}/>
         <Route index path="/register" element={<Register/>}/>
         <Route index path="/discussion" element={<Discussion/>}/>
