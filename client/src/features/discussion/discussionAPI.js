@@ -65,13 +65,13 @@ export const downvotePostAPI = async (postID) => {
   return response.json() // not sure what to return 
 }
 
-export const answerPostAPI = async (postID, body) => {
+export const replyToPostAPI = async (replyDetails) => {
   const response = await fetch("/api/create_comment", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({postID: postID, body: body})
+    body: JSON.stringify({postID: replyDetails.postID, body: replyDetails.body, parentCommentID: 0})
   })
 
   return response.json()

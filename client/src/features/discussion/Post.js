@@ -1,19 +1,41 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 import { Container, Row, Col, Button, InputGroup, FormControl } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import Comment from './Comment';
-import { downvotePost, upvotePost } from './discussionSlice';
+import { downvotePost, replyToPost, upvotePost } from './discussionSlice';
+import { resetProfile } from '../profile/profileSlice';
+import { useNavigate } from 'react-router';
 
 export function Post(props) {
   const dispatch = useDispatch()
+  const redirect = useNavigate()
   const componentHeight = props.componentHeight
   const currentPost = useSelector(state => state.discussion.currentPost)
+  const [replyMessage, setReplyMessage] = useState("")
 
   useEffect(() => {
     console.log(currentPost)
   })
+
+  const submitReplyToPost = () => {
+    dispatch(replyToPost({postID: currentPost.postID, body: replyMessage}))
+    .unwrap()
+    .then((response) => {
+      // Ensure session is still valid - if not re-login 
+      if (response.result === "Invalid Session Key") {
+        dispatch(resetProfile())
+        redirect('/login')
+      }
+    })
+    .catch(error => {
+      alert("An error occured please try again or refresh the page")
+      console.log(error)
+    })
+    setReplyMessage("")
+  }
+
 
   const displayPost = () => {
     if (currentPost.title === undefined) {
@@ -66,7 +88,6 @@ export function Post(props) {
     if (currentPost.comments === undefined) {
       return <></>
     }
-    console.log(currentPost.comments)
     return (
       <Container className="px-4 py-0 mb-0">
         {currentPost.comments.map((comment) => {
@@ -95,10 +116,13 @@ export function Post(props) {
             <FormControl
               className='text-dark'
               placeholder="Type a reply here..."
+              value={replyMessage}
+              onChange={(e) => {setReplyMessage(e.target.value)}}
+              onKeyDown={(e) => {if (e.key === "Enter") {submitReplyToPost()}}}
               aria-label="Type a reply here"
               aria-describedby="basic-addon2"
             />
-            <InputGroup.Text id="basic-addon1" className='btn btn-outline-primary bi bi-send-fill'>
+            <InputGroup.Text id="basic-addon1" className='btn btn-outline-primary bi bi-send-fill' onClick={submitReplyToPost}>
               {/* <img src='/search-interface-symbol.png' className='' style={{width: "20px", height: "20px"}} alt=''/> */}
             </InputGroup.Text>
           </InputGroup>

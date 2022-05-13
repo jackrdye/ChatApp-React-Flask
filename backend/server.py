@@ -218,7 +218,7 @@ def create_comment():
     body = request.get_json()['body']
     postID = request.get_json()['postID']
     parentCommentID = request.get_json()['parentCommentID']
-    return post_functions.create_comment(t.db, author, body, postID, parentCommentID)
+    return post_functions.create_comment(t.db, postID, parentCommentID, author, body)
 
 
 # ----------------------------------------------------------------------------
