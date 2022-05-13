@@ -31,8 +31,20 @@ export const createPost = createAsyncThunk(
   }
 )
 
-export const fetchTags = createAsyncThunk(
-  'discussion '
+export const upvotePost= createAsyncThunk(
+  'discussion/fetchAllPosts', 
+  async (searchRequests) => {
+    const response = await fetchAllPostsAPI(searchRequests)
+    return response
+  }
+)
+
+export const downvotePost= createAsyncThunk(
+  'discussion/fetchAllPosts', 
+  async (searchRequests) => {
+    const response = await fetchAllPostsAPI(searchRequests)
+    return response
+  }
 )
 
 

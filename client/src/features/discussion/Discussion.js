@@ -28,9 +28,9 @@ function Discussion() {
 
   }
 
-  useEffect(() => {
-    console.log(discussion)
-  }, [discussion])
+  // useEffect(() => {
+  //   console.log(discussion)
+  // }, [discussion])
 
   useEffect(() => {
     dispatch(fetchAllPosts({
@@ -53,7 +53,7 @@ function Discussion() {
 
 
   return (
-    <Container fluid className='border-top border-dark' style={{height: `${componentHeight}px`}}> {/*style={{height: `${componentHeight}px`}}*/}
+    <Container fluid className='border-top border-dark' style={{height: `${componentHeight}px`, maxHeight:`${componentHeight}px`}}> {/*style={{height: `${componentHeight}px`}}*/}
       <Row className=' h-100'>
         <Col sm={2} xs={2} className='border-end border-dark p-0 m-0'>
           <CourseTab setDisplayAskQuestion={setDisplayAskQuestion}/>
@@ -62,7 +62,7 @@ function Discussion() {
           <PostList sortBy={sortBy} setSortBy={setSortBy} setDisplayAskQuestion={setDisplayAskQuestion}/>
         </Col>
         <Col className="border">
-          {displayAskQuestion ? <AskQuestion setDisplayAskQuestion={setDisplayAskQuestion}/> : <Post/>} {/* Or ask question */}
+          {displayAskQuestion ? <AskQuestion setDisplayAskQuestion={setDisplayAskQuestion}/> : <Post componentHeight={componentHeight}/>} {/* Or ask question */}
         </Col>
       </Row>
     </Container>

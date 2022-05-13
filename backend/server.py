@@ -32,6 +32,13 @@ post_functions.create_post(db, "post 2", "haowen", "this is a test from h", ['ta
 post_functions.get_post_list(db, "relevant", [])
 group_message_functions.send_message(db, "info2222", "a", "hey there jack")
 post_functions.create_comment(db, "1", None, "jack", "hey you should do this")
+post_functions.create_comment(db, "1", None, "haowen", "you should also try this")
+post_functions.create_comment(db, "1", None, "jack", "hey you should do this")
+post_functions.create_comment(db, "1", None, "haowen", "you should also try this")
+post_functions.create_comment(db, "1", None, "jack", "hey you should do this")
+post_functions.create_comment(db, "1", None, "haowen", "you should also try this")
+post_functions.create_comment(db, "1", None, "jack", "hey you should do this")
+post_functions.create_comment(db, "1", None, "haowen", "you should also try this")
 
 
 

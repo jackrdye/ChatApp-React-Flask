@@ -3,8 +3,10 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 import { Container, Row, Col, Button, InputGroup } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
+import Comment from './Comment';
 
-export function Post() {
+export function Post(props) {
+  const componentHeight = props.componentHeight
   const currentPost = useSelector(state => state.discussion.currentPost)
 
   useEffect(() => {
@@ -23,7 +25,7 @@ export function Post() {
               <Button className='btn btn-success bi bi-hand-thumbs-up rounded-0 rounded-top'></Button>
             </Row>
             <Row className='row'>
-              <InputGroup.Text className='bg bg-white rounded-0'>100</InputGroup.Text>
+              <InputGroup.Text className='bg bg-white rounded-0'>{currentPost.upvotes}</InputGroup.Text>
             </Row>
             <Row className='row'>
               <Button className='btn btn-danger bi bi-hand-thumbs-down rounded-0 rounded-bottom'></Button>
@@ -31,7 +33,7 @@ export function Post() {
           </Col>
           <Col>
             <Row><h5 className='fs-2'>{currentPost.title}</h5></Row>
-            <Row><h6 className='fs-6'>{currentPost.author}</h6></Row>
+            <Row><h6 className='fs-6 fw-light'>{currentPost.author}</h6></Row>
             <Row>
           {/* Display Current Tags */}
           <div className="d-flex pb-3">
@@ -57,14 +59,25 @@ export function Post() {
     )
   }
   const displayComments = () => {
+    if (currentPost.comments === undefined) {
+      return <></>
+    }
+    console.log(currentPost.comments)
+    return (
+      <Container className="px-4 py-0 mb-0">
+        {currentPost.comments.map((comment) => {
+          return <Comment key={comment.commentID} comment={comment}/>
+        })}
+      </Container>
+    )
   }
 
 
   return (
-    <>
+    <div className='overflow-auto mb-0 pb-0' style={{maxHeight:`${componentHeight - 3}px`}}>
       {displayPost()}
       {displayComments()}
-    </>
+    </div>
   )
 }
 
