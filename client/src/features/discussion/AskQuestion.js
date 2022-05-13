@@ -42,9 +42,11 @@ function AskQuestion(props) {
 
       {/* Tag Selection */}
       <InputGroup className="pb-4 pt-3 w-50 ">
-        <p className='m-auto me-3'>Tags:</p>
+        <p className='my-auto me-3'>Tags:</p>
+        <div>
+        <InputGroup>
         <FormControl
-          className="rounded-3"
+          // className="rounded-3"
           placeholder="Enter tag here..."
           value={tag}
           onChange={(e) => setTag(e.target.value)}
@@ -52,14 +54,29 @@ function AskQuestion(props) {
           aria-describedby="basic-addon1"
           onKeyDown={(e) => {if (e.key === "Enter") {addTag(tag)}}}
         />
+        <InputGroup.Text id='basic-addon1' className="btn btn-outline-primary bi bi-plus-lg"/>
+        </InputGroup>
+        </div>
       </InputGroup>
       {/* Display Current Tags */}
       <div className="d-flex pb-3">
         {tags.map((tag) => {
           return (
-            <div key={tag} className='p-1 mx-1 border border-primary rounded-3'>
-              {tag}
-              <CloseButton onClick={() => setTags(tags => {return [...tags].filter(item => item !== tag)})}/>
+            <div key={tag} className='p-1 mx-1 '>
+              {/* {tag}
+              <CloseButton /> */}
+              <InputGroup>
+                <InputGroup.Text id='basic-addon1' className="bg-light text-dark">
+                  {tag}
+                </InputGroup.Text>
+                <InputGroup.Text 
+                  id='basic-addon1' 
+                  className="btn btn-outline-secondary bi bi-x-lg" 
+                  onClick={
+                    () => setTags(tags => {return [...tags].filter(item => item !== tag)})
+                  }
+                />
+              </InputGroup>
             </div>
           )
         })}
