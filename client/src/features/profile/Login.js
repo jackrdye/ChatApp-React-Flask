@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
-import { Form, Button } from "react-bootstrap"
+import { Form, Button, Container } from "react-bootstrap"
 import { useDispatch } from 'react-redux';
 import { login } from './profileSlice';
 
@@ -42,7 +42,7 @@ function Login() {
 
   return (
     <Form className="text-left w-75 m-auto" onSubmit={onSubmitLogin}>
-      <h2>Login Form</h2>
+      <h2 className='text-center my-3'>Login Form</h2>
       <Form.Group className="mb-3" controlId="formUsername">
         <Form.Label>Username</Form.Label>
         <Form.Control type="text" placeholder="Enter username" value={username} onChange={e => {setUsername(e.target.value)}}/>
@@ -55,9 +55,11 @@ function Login() {
         <Form.Label>Password</Form.Label>
         <Form.Control type="password" placeholder="Password" value={password} onChange={e => {setPassword(e.target.value)}}/>
       </Form.Group>
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
+      <Container className="text-center my-4">
+        <Button className='px-5 py-2' variant="primary" type="submit">
+          Submit
+        </Button>
+      </Container>
     </Form>
   )
 }
