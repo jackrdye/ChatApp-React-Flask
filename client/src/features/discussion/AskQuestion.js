@@ -26,9 +26,7 @@ function AskQuestion(props) {
   return (
     <Container className='p-4 border h-75'>
       {/* Title */}
-      
       <InputGroup className="pb-4 pt-3 border-bottom">
-        {/* <InputGroup.Text id="basic-addon1">Title</InputGroup.Text> */}
         <p className='m-auto me-3'>Title:</p>
         <FormControl
           className="rounded-3"
