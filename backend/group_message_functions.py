@@ -45,7 +45,7 @@ def get_messages(db, user, group, page_no = 1):
     messages=[]
 
     for group in resp:
-        messages.append([group[0], group[1], group[2]])
+        messages.append({'sender': group[0], 'message': group[1], 'createdOn': group[2]})
 
     messages = messages[::-1]
 
