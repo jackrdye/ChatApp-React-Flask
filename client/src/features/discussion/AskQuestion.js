@@ -21,9 +21,11 @@ function AskQuestion(props) {
       {/* Title */}
       
       <InputGroup className="mb-4 mt-3">
-        <InputGroup.Text id="basic-addon1">Title</InputGroup.Text>
+        {/* <InputGroup.Text id="basic-addon1">Title</InputGroup.Text> */}
+        <p className='m-auto me-3'>Title:</p>
         <FormControl
-          placeholder=""
+          className="rounded-3"
+          placeholder="Enter title here..."
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           aria-label=""
@@ -32,21 +34,24 @@ function AskQuestion(props) {
       </InputGroup>
 
       {/* Tag Selection */}
-      <Row className='my-3 mx-1 h-25 rounded border'>
-        <Col className='border-end'>
-          <InputGroup className='mt-1 border'>
+      <Row className='my-3 mx-1 h-25 rounded '>
+        <Col className=''>
+          <InputGroup className='mt-1'>
+            <p className="m-auto me-2">Tags:</p>
             <FormControl
               placeholder='Enter tag'
+              className="rounded-3"
             />
           </InputGroup>
         </Col>
-        <Col className='border-start'>
+        <Col className=''>
 
         </Col>
       </Row>
 
       {/* Question Body */}
-      <InputGroup className='mt-4 h-50'>
+      <p className='mt-2'>Body:</p>
+      <InputGroup className='mt-2 h-50'>
         {/* <InputGroup.Text>With textarea</InputGroup.Text> */}
         <FormControl 
           as='textarea'

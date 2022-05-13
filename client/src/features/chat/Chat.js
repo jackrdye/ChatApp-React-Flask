@@ -18,21 +18,21 @@ function Chat() {
 
 
   useEffect(() => {
-    // dispatch(
-    //   recieveGroupMessages()
-    // )
-    // .unwrap()
-    // .then((response) => {
-    //   // Ensure session is still valid - if not re-login 
-    //   if (response.result === "Invalid Session Key") {
-    //     dispatch(resetProfile())
-    //     redirect('/login')
-    //   }
-    // })
-    // .catch(error => {
-    //   alert("An error occured please try again or refresh the page")
-    //   console.log(error)
-    // })
+    dispatch(
+      recieveGroupMessages()
+    )
+    .unwrap()
+    .then((response) => {
+      // Ensure session is still valid - if not re-login 
+      if (response.result === "Invalid Session Key") {
+        dispatch(resetProfile())
+        redirect('/login')
+      }
+    })
+    .catch(error => {
+      alert("An error occured please try again or refresh the page")
+      console.log(error)
+    })
     
   
   }, [])
