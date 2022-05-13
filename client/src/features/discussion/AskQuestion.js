@@ -18,15 +18,15 @@ function AskQuestion(props) {
 
   const onSubmitPost = (e) => {
     e.preventDefault()
-    dispatch(createPost({title: title, body:body, tags: []}))
+    dispatch(createPost({title: title, body:body, tags: tags}))
     alert("Your question has been submitted")
     setDisplayAskQuestion(false)
   }
 
   return (
-    <Container className='p-4 border h-75'>
+    <Container className='p-4 h-75'>
       {/* Title */}
-      <InputGroup className="pb-4 pt-3 border-bottom">
+      <InputGroup>
         <p className='m-auto me-3'>Title:</p>
         <FormControl
           className="rounded-3"
@@ -37,9 +37,10 @@ function AskQuestion(props) {
           aria-describedby="basic-addon1"
         />
       </InputGroup>
+      <hr/>
 
       {/* Tag Selection */}
-      <InputGroup className="pb-4 pt-3 w-50 ">
+      <InputGroup className="w-50 ">
         <p className='my-auto me-3'>Tags:</p>
         <div>
         <InputGroup>
@@ -64,10 +65,10 @@ function AskQuestion(props) {
         </div>
       </InputGroup>
       {/* Display Current Tags */}
-      <div className="d-flex pb-3 border">
+      <div className="d-flex">
         {tags.map((tag) => {
           return (
-            <div key={tag} className='p-1 mx-1 '>
+            <div key={tag} className='p-1 mx-1 pt-4'>
               {/* {tag}
               <CloseButton /> */}
               <InputGroup size="sm">
@@ -86,9 +87,11 @@ function AskQuestion(props) {
           )
         })}
       </div>
+      
+      <hr/>
 
       {/* Question Body */}
-      <p className='pt-2 border-top'>Body:</p>
+      <p className='pt-2'>Body:</p>
       <InputGroup className='pt-2 h-50'>
         {/* <InputGroup.Text>With textarea</InputGroup.Text> */}
         <FormControl 
