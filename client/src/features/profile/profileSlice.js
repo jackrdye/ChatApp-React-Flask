@@ -1,12 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { registerAPI, loginAPI } from "./profileAPI";
+import Cookies from 'universal-cookie'
+const cookies = new Cookies();
 
 
 let initialState = JSON.parse(localStorage.getItem("profile"))
 if (initialState === null) {
   initialState = {
     isLoggedIn: false,
-    isAdmin: false
+    isAdmin: false,
+    sessionKey: ""
   }
 } 
 
@@ -39,6 +42,7 @@ export const profileSlice = createSlice({
       state.isLoggedIn = false
       state.isAdmin = false
       localStorage.setItem("profile", JSON.stringify(state))
+      cookies.remove("session_key")
     }
   },
   extraReducers: (builder) => {
@@ -49,6 +53,8 @@ export const profileSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         if (action.payload.result === "success") {
           state.isLoggedIn = true
+          state.sessionKey = action.payload.session_cookie
+          cookies.set("session_key", action.payload.session_cookie)
         } 
         localStorage.setItem("profile", JSON.stringify(state))
       })
