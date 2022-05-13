@@ -48,14 +48,18 @@ function AskQuestion(props) {
           value={tag}
           onChange={(e) => setTag(e.target.value)}
           onKeyPress={
-            (e) => {if (e.key == "Enter") {
+            (e) => {if (e.key === "Enter") {
               addTag(tag)
             }}
           }
           aria-label=""
           aria-describedby="basic-addon1"
         />
-        <InputGroup.Text id='basic-addon1' className="btn btn-outline-primary bi bi-plus-lg" type="submit" onClick={(e) => addTag(tag)}/>
+        <InputGroup.Text 
+          id='basic-addon1' 
+          className="btn btn-outline-primary bi bi-plus-lg" 
+          onClick={(e) => addTag(tag)}
+        />
         </InputGroup>
         </div>
       </InputGroup>
