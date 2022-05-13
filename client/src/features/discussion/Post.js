@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import "bootstrap-icons/font/bootstrap-icons.css";
 
-import { Container, Row, Col, Button, InputGroup } from 'react-bootstrap'
+import { Container, Row, Col, Button, InputGroup, FormControl } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import Comment from './Comment';
 import { downvotePost, upvotePost } from './discussionSlice';
@@ -20,7 +20,7 @@ export function Post(props) {
       return <h4 className='text-center mt-5'>Click a post on the left to display</h4>
     } 
     return (
-      <Container className='pt-3 border-bottom border-secondary'>
+      <Container className='pt-3 border-secondary'>
         <Row>
           <Col className='col-md-auto'>
             <Row className='row'>
@@ -74,13 +74,39 @@ export function Post(props) {
     )
   }
 
+  if (currentPost.title === undefined) {
+    return (
+      <div className='overflow-auto m-0 p-0' style={{maxHeight:`${componentHeight - 3}px`}}>
+        <h4 className='text-center mt-5'>Click a post on the left to display</h4>
+      </div>
+    )
+  }
+  else {
+    return (
+      <div className='overflow-auto m-0 p-0' style={{maxHeight:`${componentHeight - 3}px`}}>
+        {displayPost()}
+        
+        <hr/>
 
-  return (
-    <div className='overflow-auto mb-0 pb-0' style={{maxHeight:`${componentHeight - 3}px`}}>
-      {displayPost()}
-      {displayComments()}
-    </div>
-  )
+        <Container className="px-3 py-0 mb-0">
+          <InputGroup className="w-100 p-2 m-auto">
+            <FormControl
+              className='text-dark'
+              placeholder="Type a reply here..."
+              aria-label="Type a reply here"
+              aria-describedby="basic-addon2"
+            />
+            <InputGroup.Text id="basic-addon1" className='btn btn-outline-primary bi bi-send-fill'>
+              {/* <img src='/search-interface-symbol.png' className='' style={{width: "20px", height: "20px"}} alt=''/> */}
+            </InputGroup.Text>
+          </InputGroup>
+        </Container>
+        <hr/>
+
+        {displayComments()}
+      </div>
+    )
+  }
 }
 
 export default Post

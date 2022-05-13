@@ -9,7 +9,7 @@ function Comment(props) {
   const parentCommentID = props.comment.parentCommentID
 
   return (
-    <Container className='p-3 my-2 border rounded-3 bg-secondary text-light'>
+    <Container className='p-3 my-2 border rounded-3 bg-light text-dark'>
       <p className='fs-6 p-0 mb-0 fw-light'>{author}</p>
       <p className='fs-5 p-0 mt-0 mb-1'>{body}</p>
     </Container>
