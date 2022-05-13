@@ -110,6 +110,8 @@ def create_post():
     """
     session_key = request.cookies.get("session_key")
     author = account_functions.get_username_from_session(t.db, session_key)
+    if not author:
+        return {'result': 'failure'}
     title = request.get_json()['title']
     body = request.get_json()['body']
     tags = request.get_json()['tags']
@@ -126,6 +128,8 @@ def get_post_list():
         tags: []    // Empty for no tags filter
     }
     """
+    if not account_functions.get_username_from_session(t.db, request.cookies.get("session_key")):
+        return {'result': 'failure'}
     sort_order = request.get_json()['sort_order']
     tags = request.get_json()['tags']
     return post_functions.get_post_list(t.db, sort_order, tags)
@@ -145,6 +149,8 @@ def get_post():
         postID: 223, // Post to retrieve
     }
     """
+    if not account_functions.get_username_from_session(t.db, request.cookies.get("session_key")):
+        return {'result': 'failure'}
     postID = request.get_json()['postID']
     return post_functions.get_post(t.db, postID)
     """
@@ -177,6 +183,8 @@ def upvote():
         postID: 223,
     }
     """
+    if not account_functions.get_username_from_session(t.db, request.cookies.get("session_key")):
+        return {'result': 'failure'}
     postID = request.get_json()['postID']
     return post_functions.upvote(t.db, postID)
 
@@ -188,6 +196,8 @@ def downvote():
         postID: 223,
     }
     """
+    if not account_functions.get_username_from_session(t.db, request.cookies.get("session_key")):
+        return {'result': 'failure'}
     postID = request.get_json()['postID']
     return post_functions.downvote(t.db, postID)
 
@@ -203,6 +213,8 @@ def create_comment():
     """
     session_key = request.cookies.get("session_key")
     author = account_functions.get_username_from_session(t.db, session_key)
+    if not author:
+        return {'result': 'failure'}
     body = request.get_json()['body']
     postID = request.get_json()['postID']
     parentCommentID = request.get_json()['parentCommentID']
@@ -221,6 +233,8 @@ def send_group_message():
         message: "This is a test message
     }
     """
+    if not account_functions.get_username_from_session(t.db, request.cookies.get("session_key")):
+        return {'result': 'failure'}
     session_key = request.cookies.get("session_key")
     sender = account_functions.get_username_from_session(t.db, session_key)
     group = request.get_json()['group']
@@ -238,6 +252,8 @@ def get_group_messages():
         page: 1
     }
     """
+    if not account_functions.get_username_from_session(t.db, request.cookies.get("session_key")):
+        return {'result': 'failure'}
     session_key = request.cookies.get("session_key")
     user = account_functions.get_username_from_session(t.db, session_key)
     group = request.get_json()['group']
@@ -256,6 +272,8 @@ def get_group_messages():
 # Message Functions
 @app.route("/api/send_message", methods=["POST"])
 def send_message():
+    if not account_functions.get_username_from_session(t.db, request.cookies.get("session_key")):
+        return {'result': 'failure'}
     session_key = request.cookies.get("session_key")
     sender = account_functions.get_username_from_session(t.db, session_key)
     recipient = request.get_json()['recipient']
@@ -268,6 +286,8 @@ def send_message():
 
 @app.route("/api/get_messages", methods=["GET"])
 def get_messages():
+    if not account_functions.get_username_from_session(t.db, request.cookies.get("session_key")):
+        return {'result': 'failure'}
     session_key = request.cookies.get("session_key")
     username = account_functions.get_username_from_session(t.db, session_key)
 
@@ -278,6 +298,8 @@ def get_messages():
 # Friend Functions
 @app.route("/api/get_friend_list", methods=["GET"])
 def get_friend_list():
+    if not account_functions.get_username_from_session(t.db, request.cookies.get("session_key")):
+        return {'result': 'failure'}
     session_key = request.cookies.get("session_key")
     username = account_functions.get_username_from_session(t.db, session_key)
 
@@ -285,6 +307,8 @@ def get_friend_list():
 
 @app.route("/api/send_friend_request", methods=["POST"])
 def send_friend_request():
+    if not account_functions.get_username_from_session(t.db, request.cookies.get("session_key")):
+        return {'result': 'failure'}
     session_key = request.cookies.get("session_key")
     username = account_functions.get_username_from_session(t.db, session_key)
     othername = request.get_json()['recipient']
@@ -293,6 +317,8 @@ def send_friend_request():
 
 @app.route("/api/accept_friend_request", methods=["POST"])
 def accept_friend_requests():
+    if not account_functions.get_username_from_session(t.db, request.cookies.get("session_key")):
+        return {'result': 'failure'}
     session_key = request.cookies.get("session_key")
     username = account_functions.get_username_from_session(t.db, session_key)
     othername = request.get_json()['recipient']
@@ -302,6 +328,8 @@ def accept_friend_requests():
 
 @app.route("/api/check_for_friend_requests", methods=["GET"])
 def check_for_friend_request():
+    if not account_functions.get_username_from_session(t.db, request.cookies.get("session_key")):
+        return {'result': 'failure'}
     session_key = request.cookies.get("session_key")
     username = account_functions.get_username_from_session(t.db, session_key)
 
@@ -310,6 +338,8 @@ def check_for_friend_request():
 # Key Functions
 @app.route("/api/get_friends_keys", methods=["GET"])
 def get_friends_keys():
+    if not account_functions.get_username_from_session(t.db, request.cookies.get("session_key")):
+        return {'result': 'failure'}
     session_key = request.cookies.get("session_key")
     username = account_functions.get_username_from_session(t.db, session_key)
 
@@ -317,6 +347,8 @@ def get_friends_keys():
 
 @app.route("/api/set_keys", methods=["POST"])
 def set_keys():
+    if not account_functions.get_username_from_session(t.db, request.cookies.get("session_key")):
+        return {'result': 'failure'}
     session_key = request.cookies.get("session_key")
     username = account_functions.get_username_from_session(t.db, session_key)
     publicKey = request.get_json()['public_key']
