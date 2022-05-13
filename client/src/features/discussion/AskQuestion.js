@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Col, Container, FormControl, InputGroup, Row } from 'react-bootstrap'
+import { Button, CloseButton, Col, Container, FormControl, InputGroup, Row } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
 import { createPost } from './discussionSlice'
 
@@ -7,7 +7,13 @@ function AskQuestion(props) {
   const dispatch = useDispatch()
   const setDisplayAskQuestion = props.setDisplayAskQuestion
   const [title, setTitle] = useState("")
+  const [tag, setTag] = useState("")
+  const [tags, setTags] = useState(["Assignment 1", "Assignment 2"])
   const [body, setBody] = useState("")
+
+  const addTag = () => {
+    setTags(tags => [...tags, tag])
+  }
 
   const onSubmitPost = (e) => {
     e.preventDefault()
@@ -20,7 +26,7 @@ function AskQuestion(props) {
     <Container className='p-4 border h-75'>
       {/* Title */}
       
-      <InputGroup className="mb-4 mt-3">
+      <InputGroup className="pb-4 pt-3 border-bottom">
         {/* <InputGroup.Text id="basic-addon1">Title</InputGroup.Text> */}
         <p className='m-auto me-3'>Title:</p>
         <FormControl
@@ -34,24 +40,32 @@ function AskQuestion(props) {
       </InputGroup>
 
       {/* Tag Selection */}
-      <Row className='my-3 mx-1 h-25 rounded '>
-        <Col className=''>
-          <InputGroup className='mt-1'>
-            <p className="m-auto me-2">Tags:</p>
-            <FormControl
-              placeholder='Enter tag'
-              className="rounded-3"
-            />
-          </InputGroup>
-        </Col>
-        <Col className=''>
-
-        </Col>
-      </Row>
+      <InputGroup className="pb-4 pt-3 w-50 ">
+        <p className='m-auto me-3'>Tags:</p>
+        <FormControl
+          className="rounded-3"
+          placeholder="Enter tag here..."
+          value={tag}
+          onChange={(e) => setTag(e.target.value)}
+          aria-label=""
+          aria-describedby="basic-addon1"
+        />
+      </InputGroup>
+      {/* Display Current Tags */}
+      <div className="d-flex pb-3">
+        {tags.map((tag) => {
+          return (
+            <div key={tag} className='p-1 mx-1 border border-primary rounded-3'>
+              {tag}
+              <CloseButton onClick={() => setTags(tags => {return [...tags].filter(item => item !== tag)})}/>
+            </div>
+          )
+        })}
+      </div>
 
       {/* Question Body */}
-      <p className='mt-2'>Body:</p>
-      <InputGroup className='mt-2 h-50'>
+      <p className='pt-2 border-top'>Body:</p>
+      <InputGroup className='pt-2 h-50'>
         {/* <InputGroup.Text>With textarea</InputGroup.Text> */}
         <FormControl 
           as='textarea'
