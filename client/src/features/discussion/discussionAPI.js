@@ -41,7 +41,7 @@ export const createPostAPI = async (postDetails) => {
   return response.json()
 }
 
-export const upVotePost = async (postID) => {
+export const upvotePostAPI = async (postID) => {
   const response = await fetch("/api/upvote", {
     method: "POST",
     headers: {
@@ -53,7 +53,7 @@ export const upVotePost = async (postID) => {
   return response.json() // not sure what to return 
 }
 
-export const downVotePost = async (postID) => {
+export const downvotePostAPI = async (postID) => {
   const response = await fetch("/api/downvote", {
     method: "POST",
     headers: {
@@ -65,7 +65,7 @@ export const downVotePost = async (postID) => {
   return response.json() // not sure what to return 
 }
 
-export const answerPost = async (postID, body) => {
+export const answerPostAPI = async (postID, body) => {
   const response = await fetch("/api/create_comment", {
     method: "POST",
     headers: {

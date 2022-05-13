@@ -2,10 +2,12 @@ import React, { useEffect } from 'react'
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 import { Container, Row, Col, Button, InputGroup } from 'react-bootstrap'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Comment from './Comment';
+import { downvotePost, upvotePost } from './discussionSlice';
 
 export function Post(props) {
+  const dispatch = useDispatch()
   const componentHeight = props.componentHeight
   const currentPost = useSelector(state => state.discussion.currentPost)
 
@@ -22,13 +24,13 @@ export function Post(props) {
         <Row>
           <Col className='col-md-auto'>
             <Row className='row'>
-              <Button className='btn btn-success bi bi-hand-thumbs-up rounded-0 rounded-top'></Button>
+              <Button onClick={() => {dispatch(upvotePost(currentPost.postID))}} className='btn btn-success bi bi-hand-thumbs-up rounded-0 rounded-top'></Button>
             </Row>
             <Row className='row'>
               <InputGroup.Text className='bg bg-white rounded-0'>{currentPost.upvotes}</InputGroup.Text>
             </Row>
             <Row className='row'>
-              <Button className='btn btn-danger bi bi-hand-thumbs-down rounded-0 rounded-bottom'></Button>
+              <Button onClick={() => {dispatch(downvotePost(currentPost.postID))}} className='btn btn-danger bi bi-hand-thumbs-down rounded-0 rounded-bottom'></Button>
             </Row>
           </Col>
           <Col>

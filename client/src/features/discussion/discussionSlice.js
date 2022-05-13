@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchAllPostsAPI, fetchPostDetailAPI, createPostAPI } from './discussionAPI'
+import { fetchAllPostsAPI, fetchPostDetailAPI, createPostAPI, upvotePostAPI, downvotePostAPI } from './discussionAPI'
 
 const initialState = { 
   status: 'idle',
@@ -32,17 +32,17 @@ export const createPost = createAsyncThunk(
 )
 
 export const upvotePost= createAsyncThunk(
-  'discussion/fetchAllPosts', 
-  async (searchRequests) => {
-    const response = await fetchAllPostsAPI(searchRequests)
+  'discussion/upvotePost', 
+  async (postID) => {
+    const response = await upvotePostAPI(postID)
     return response
   }
 )
 
 export const downvotePost= createAsyncThunk(
-  'discussion/fetchAllPosts', 
-  async (searchRequests) => {
-    const response = await fetchAllPostsAPI(searchRequests)
+  'discussion/downvotePost', 
+  async (postID) => {
+    const response = await downvotePostAPI(postID)
     return response
   }
 )
@@ -71,6 +71,13 @@ export const discussionSlice = createSlice({
           console.log(action.payload)
           state.posts.unshift({post_id: action.payload.postID, title: action.payload.title})
         }
+      })
+
+      .addCase(upvotePost.fulfilled, (state) => {
+        state.currentPost.upvotes += 1
+      })
+      .addCase(downvotePost.fulfilled, (state) => {
+        state.currentPost.upvotes -= 1
       })
 
 

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Button, CloseButton, Col, Container, FormControl, InputGroup, Row } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router'
+import { resetProfile } from '../profile/profileSlice'
 import { createPost } from './discussionSlice'
 
 function AskQuestion(props) {
   const dispatch = useDispatch()
+  const redirect = useNavigate()
   const setDisplayAskQuestion = props.setDisplayAskQuestion
   const [title, setTitle] = useState("")
   const [tag, setTag] = useState("")
@@ -19,6 +22,18 @@ function AskQuestion(props) {
   const onSubmitPost = (e) => {
     e.preventDefault()
     dispatch(createPost({title: title, body:body, tags: []}))
+    .unwrap()
+    .then((response) => {
+      // Ensure session is still valid - if not re-login 
+      if (response.result === "Invalid Session Key") {
+        dispatch(resetProfile())
+        redirect('/login')
+      }
+    })
+    .catch(error => {
+      alert("An error occured please try again or refresh the page")
+      console.log(error)
+    })
     alert("Your question has been submitted")
     setDisplayAskQuestion(false)
   }
