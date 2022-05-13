@@ -95,7 +95,7 @@ function Chat() {
           </ListGroup>
         </Col>
         <Col className='my-1 h-75 '>
-          <Container className=' h-100 px-3 py-1 mh-100 borde border-dark overflow-auto'>
+          <Container className=' h-100 px-3 py-1 mh-100 border overflow-auto'>
             {displayMessages()}
           </Container>
           {displayMessageBar()}

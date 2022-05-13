@@ -8,7 +8,7 @@ function AskQuestion(props) {
   const setDisplayAskQuestion = props.setDisplayAskQuestion
   const [title, setTitle] = useState("")
   const [tag, setTag] = useState("")
-  const [tags, setTags] = useState(["Assignment 1", "Assignment 2"])
+  const [tags, setTags] = useState([])
   const [body, setBody] = useState("")
 
   const addTag = () => {
@@ -25,9 +25,7 @@ function AskQuestion(props) {
   return (
     <Container className='p-4 border h-75'>
       {/* Title */}
-      
       <InputGroup className="pb-4 pt-3 border-bottom">
-        {/* <InputGroup.Text id="basic-addon1">Title</InputGroup.Text> */}
         <p className='m-auto me-3'>Title:</p>
         <FormControl
           className="rounded-3"
