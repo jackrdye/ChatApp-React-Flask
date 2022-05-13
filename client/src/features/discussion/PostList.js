@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Dropdown, DropdownButton, FormControl, InputGroup, ListGroup } from 'react-bootstrap'
+import { Dropdown, DropdownButton, FormControl, InputGroup, ListGroup, Form, Col} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchPostDetail } from './discussionSlice'
 
@@ -45,20 +45,24 @@ export function PostList(props) {
         </InputGroup>
       {/* SortBy dropdown */}
 
-      <InputGroup className="p-2 w-100">
+
+      <InputGroup className="p-2 w-100 float-right" align="end">
         {/* <InputGroup.Text className=''>SortBy:</InputGroup.Text> */}
-        <p className='m-auto me-3'>SortBy:</p>
-        <DropdownButton
-          variant="outline-secondary rounded-3"
+        <Col className='my-auto'>
+        <p className='m-auto me-3'>Sort by:</p>
+        </Col>
+        <Col>
+        <Form.Select
+          variant="outline-dark rounded-3"
           title={sortByDisplay()}
           id="input-group-dropdown-2"
-          align="end"
         >
-          <Dropdown.Item onClick={() => {setSortBy("relevant")}} href="#">Relevance</Dropdown.Item>  
-          <Dropdown.Item onClick={() => {setSortBy("latest")}} href="#">Latest</Dropdown.Item>
-          <Dropdown.Item onClick={() => {setSortBy("earliest")}} href="#">Earliest</Dropdown.Item>
-          <Dropdown.Item onClick={() => {setSortBy("upvotes")}} href="#">Upvotes</Dropdown.Item>
-        </DropdownButton>
+          <option onClick={() => {setSortBy("relevant")}} href="#">Relevance</option>  
+          <option onClick={() => {setSortBy("latest")}} href="#">Latest</option>
+          <option onClick={() => {setSortBy("earliest")}} href="#">Earliest</option>
+          <option onClick={() => {setSortBy("upvotes")}} href="#">Upvotes</option>
+        </Form.Select>
+        </Col>
       </InputGroup>
 
       {/* DisplayList */}
