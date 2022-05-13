@@ -44,11 +44,9 @@ export function PostList(props) {
             {/* <img src='/search-interface-symbol.png' className='' style={{width: "20px", height: "20px"}} alt=''/> */}
           </InputGroup.Text>
         </InputGroup>
+
       {/* SortBy dropdown */}
-
-
       <InputGroup className="p-2 w-100 float-right" align="end">
-        {/* <InputGroup.Text className=''>SortBy:</InputGroup.Text> */}
         <Col className='my-auto'>
         <p className='m-auto me-3'>Sort by:</p>
         </Col>
@@ -67,7 +65,7 @@ export function PostList(props) {
       </InputGroup>
 
       {/* DisplayList */}
-      <ListGroup className='border-top border-dark overflow-auto'>
+      <ListGroup className='border-top rounded-0 border-dark overflow-auto'>
         {posts.map(post => {
           return <ListGroup.Item className='rounded-0' id={post.post_id} key={post.post_id} onClick={onClickPost} active={(selectedPost === post.post_id)}>{post.title}</ListGroup.Item>
         })}

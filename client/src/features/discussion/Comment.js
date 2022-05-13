@@ -1,10 +1,11 @@
 import React from 'react'
+import { Container } from 'react-bootstrap'
 
 function Comment() {
   return (
-    <div>
-      Comment
-    </div>
+    <Container>
+      
+    </Container>
   )
 }
 

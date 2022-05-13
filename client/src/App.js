@@ -7,6 +7,7 @@ import Discussion from './features/discussion/Discussion';
 import Login from './features/profile/Login'
 import Register from './features/profile/Register'
 import Resources from './features/resources/Resources'
+import Help from './Help';
 import Home from './Home'
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route index path="/discussion" element={<Discussion/>}/>
         <Route index path="/chat" element={<Chat/>}/>
         <Route index path="/resources" element={<Resources/>}/>
+        <Route index path="/help" element={<Help/>}/>
 
       </Routes>
     </BrowserRouter>

@@ -13,6 +13,7 @@ function AskQuestion(props) {
 
   const addTag = () => {
     setTags(tags => [...tags, tag])
+    setTag("")
   }
 
   const onSubmitPost = (e) => {
@@ -43,7 +44,6 @@ function AskQuestion(props) {
         <div>
         <InputGroup>
         <FormControl
-          // className="rounded-3"
           placeholder="Enter tag here..."
           value={tag}
           onChange={(e) => setTag(e.target.value)}
@@ -64,7 +64,7 @@ function AskQuestion(props) {
         </div>
       </InputGroup>
       {/* Display Current Tags */}
-      <div className="d-flex pb-3">
+      <div className="d-flex pb-3 border">
         {tags.map((tag) => {
           return (
             <div key={tag} className='p-1 mx-1 '>
