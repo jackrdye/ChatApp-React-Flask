@@ -8,7 +8,7 @@ function AskQuestion(props) {
   const setDisplayAskQuestion = props.setDisplayAskQuestion
   const [title, setTitle] = useState("")
   const [tag, setTag] = useState("")
-  const [tags, setTags] = useState(["Assignment 1", "Assignment 2"])
+  const [tags, setTags] = useState([])
   const [body, setBody] = useState("")
 
   const addTag = () => {
