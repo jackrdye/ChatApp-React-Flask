@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import { Dropdown, DropdownButton, FormControl, InputGroup, ListGroup, ListGroupItem, SplitButton } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Dropdown, DropdownButton, FormControl, InputGroup, ListGroup } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchPostDetail } from './discussionSlice'
 
@@ -8,6 +8,20 @@ export function PostList(props) {
   const setDisplayAskQuestion = props.setDisplayAskQuestion
   const posts = useSelector(state => state.discussion.posts)
   const selectedPost = useSelector(state => state.discussion.currentPost.postID)
+
+  const sortBy = props.sortBy
+  const setSortBy = props.setSortBy // relevant || latest || earliest || upvotes
+  const sortByDisplay = () => {
+    if (sortBy === "relevant") {
+      return "Relevance"
+    } else if (sortBy === "latest") {
+      return "Latest"
+    } else if (sortBy === "earliest") {
+      return "Earliest"
+    } else if (sortBy === "upvotes") {
+      return "Upvotes"
+    }
+  }
   
   const onClickPost = (e) => {
     e.preventDefault()
@@ -18,7 +32,7 @@ export function PostList(props) {
   return (
     <div>
       {/* SearchBar */}
-      <InputGroup className="w-75 my-2 m-auto">
+      <InputGroup className="w-100 p-2 m-auto">
           <FormControl
             className='text-dark rounded-3'
             placeholder="Search for Post"
@@ -31,20 +45,19 @@ export function PostList(props) {
         </InputGroup>
       {/* SortBy dropdown */}
 
-      <InputGroup className="m-auto w-75">
-        <InputGroup.Text>SortBy:</InputGroup.Text>
-
+      <InputGroup className="p-2 w-100">
+        {/* <InputGroup.Text className=''>SortBy:</InputGroup.Text> */}
+        <p className='m-auto me-3'>SortBy:</p>
         <DropdownButton
-          variant="outline-secondary"
-          title="Dropdown"
+          variant="outline-secondary rounded-3"
+          title={sortByDisplay()}
           id="input-group-dropdown-2"
           align="end"
         >
-          <Dropdown.Item href="#">Action</Dropdown.Item>
-          <Dropdown.Item href="#">Another action</Dropdown.Item>
-          <Dropdown.Item href="#">Something else here</Dropdown.Item>
-          <Dropdown.Divider />
-          <Dropdown.Item href="#">Separated link</Dropdown.Item>
+          <Dropdown.Item onClick={() => {setSortBy("relevant")}} href="#">Relevance</Dropdown.Item>  
+          <Dropdown.Item onClick={() => {setSortBy("latest")}} href="#">Latest</Dropdown.Item>
+          <Dropdown.Item onClick={() => {setSortBy("earliest")}} href="#">Earliest</Dropdown.Item>
+          <Dropdown.Item onClick={() => {setSortBy("upvotes")}} href="#">Upvotes</Dropdown.Item>
         </DropdownButton>
       </InputGroup>
 

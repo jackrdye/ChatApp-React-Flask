@@ -24,6 +24,10 @@ function Discussion() {
   const [sortBy, setSortBy] = useState("relevant") // relevant || latest || earliest || upvotes
   const [tags, setTags] = useState([])
 
+  const fetchPosts = () => {
+
+  }
+
   useEffect(() => {
     console.log(discussion)
   }, [discussion])
@@ -45,7 +49,7 @@ function Discussion() {
       alert("An error occured please try again or refresh the page")
       console.log(error)
     })
-  }, [])
+  }, [sortBy])
 
 
   return (
@@ -55,7 +59,7 @@ function Discussion() {
           <CourseTab setDisplayAskQuestion={setDisplayAskQuestion}/>
         </Col>
         <Col sm={3} xs={3} className='border-end border-dark p-0 m-0'>
-          <PostList setDisplayAskQuestion={setDisplayAskQuestion}/>
+          <PostList sortBy={sortBy} setSortBy={setSortBy} setDisplayAskQuestion={setDisplayAskQuestion}/>
         </Col>
         <Col className="border">
           {displayAskQuestion ? <AskQuestion setDisplayAskQuestion={setDisplayAskQuestion}/> : <Post/>} {/* Or ask question */}

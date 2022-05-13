@@ -45,7 +45,7 @@ export const discussionSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllPosts.fulfilled, (state, action) => {
-        if (action.payload.result === "success" && state.status === "idle") {
+        if (action.payload.result === "success" ) { //&& state.status === "idle"
           state.posts = action.payload.posts
           state.status = "loaded"
         }
