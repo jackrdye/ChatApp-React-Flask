@@ -55,7 +55,11 @@ function AskQuestion(props) {
           aria-label=""
           aria-describedby="basic-addon1"
         />
-        <InputGroup.Text id='basic-addon1' className="btn btn-outline-primary bi bi-plus-lg" type="submit" onClick={(e) => addTag(tag)}/>
+        <InputGroup.Text 
+          id='basic-addon1' 
+          className="btn btn-outline-primary bi bi-plus-lg" 
+          onClick={(e) => addTag(tag)}
+        />
         </InputGroup>
         </div>
       </InputGroup>
