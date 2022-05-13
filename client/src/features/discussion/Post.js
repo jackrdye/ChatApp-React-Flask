@@ -37,7 +37,7 @@ export function Post() {
           <div className="d-flex pb-3">
             {currentPost.tags.map((tag) => {
               return (
-                <div key={tag} className='p-1 mx-1 '>
+                <div key={tag} className='p-1 my-auto'>
                   {/* {tag}
                   <CloseButton /> */}
                   <InputGroup size="sm">
