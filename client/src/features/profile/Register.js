@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
-import { Form, Button } from "react-bootstrap"
+import { Form, Button, Container } from "react-bootstrap"
 import { useDispatch, useSelector } from 'react-redux';
 import { register, login } from './profileSlice'
 import { selectIsLoggedIn } from './profileSlice'
@@ -9,6 +9,7 @@ import { selectIsLoggedIn } from './profileSlice'
  
 function Register() {
   const dispatch = useDispatch()
+  const redirect = useNavigate()
   const isLoggedIn = useSelector(selectIsLoggedIn)
 
   const [username, setUsername] = useState("")
@@ -31,6 +32,7 @@ function Register() {
           username: username, 
           password: password})
         )
+        redirect("/discussion")
       } else if (response.result === "username already exists") {
         alert(`The username ${username} already exists please choose another`)
         setUsername("")
@@ -49,7 +51,7 @@ function Register() {
 
   return (
     <Form className="text-left w-75 m-auto" onSubmit={onSubmitForm}>
-      <h2>Please Register Below</h2>
+      <h2 className='text-center my-3'>Please Register Below</h2>
       <Form.Group className="mb-3" controlId="formUsername">
         <Form.Label>Username</Form.Label>
         <Form.Control type="text" placeholder="Enter username" value={username} onChange={e => {setUsername(e.target.value)}}/>
@@ -62,9 +64,11 @@ function Register() {
         <Form.Label>Password</Form.Label>
         <Form.Control type="password" placeholder="Password" value={password} onChange={e => {setPassword(e.target.value)}}/>
       </Form.Group>
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
+      <Container className="text-center my-4">
+        <Button className='px-5 py-2' variant="primary" type="submit">
+          Submit
+        </Button>
+      </Container>
     </Form>
   )
 }

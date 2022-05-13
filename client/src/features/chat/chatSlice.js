@@ -18,7 +18,7 @@ export const fetchAllChats = createAsyncThunk(
 
 export const sendGroupMessage = createAsyncThunk(
   'chat/sendGroupMessage',
-  async ({messageDetails}) => {
+  async (messageDetails) => {
     const response = await sendGroupMessageAPI(messageDetails)
     return response
   }
@@ -54,11 +54,14 @@ export const chatSlice = createSlice({
       // Handle sendGroupMessage
       .addCase(sendGroupMessage.fulfilled, (state, action) => {
         state.messages.push({sender: action.payload.sender, message: action.payload.message})
+        console.log(state.messages)
+
         // TODO: - Update correct group with new message 
       })
       // Handle recieveGroupMessage
       .addCase(recieveGroupMessages.fulfilled, (state, action) => {
         state.messages.push(action.payload)
+        console.log(state.messages)
         // TODO: - Update correct group with new messages
       })
           

@@ -7,6 +7,7 @@ import Discussion from './features/discussion/Discussion';
 import Login from './features/profile/Login'
 import Register from './features/profile/Register'
 import Resources from './features/resources/Resources'
+import Home from './Home'
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
       <NavigationBar/>
 
       <Routes>
-        <Route index path="/" element={<></>}/>
+        <Route index path="/" element={<><Home/></>}/>
         <Route index path="/login" element={<Login/>}/>
         <Route index path="/register" element={<Register/>}/>
         <Route index path="/discussion" element={<Discussion/>}/>

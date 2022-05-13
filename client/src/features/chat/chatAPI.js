@@ -9,12 +9,12 @@ export const fetchAllChatsAPI = async () => {
   ) 
   
     // Validate [{postID, title}]
-    
+
   return response.json()
 } 
 
 export const sendGroupMessageAPI = async (messageDetails) => {
-    const response = await fetch('/api/get_all_posts', {
+    const response = await fetch('/api/send_group_message', {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -22,7 +22,7 @@ export const sendGroupMessageAPI = async (messageDetails) => {
         body: JSON.stringify({group: "info2222", message: messageDetails.message})// {sortOrder: sortOrder, tags: tags}
       }
       ) 
-      
+      console.log(response)
       return response.json()
 }
 

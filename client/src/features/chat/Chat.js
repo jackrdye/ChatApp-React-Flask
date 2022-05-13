@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Col, Container, ListGroup, Row } from 'react-bootstrap'
+import { Button, Col, Container, FormControl, InputGroup, ListGroup, Row } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 import { resetProfile } from '../profile/profileSlice'
@@ -18,21 +18,21 @@ function Chat() {
 
 
   useEffect(() => {
-    dispatch(
-      recieveGroupMessages()
-    )
-    .unwrap()
-    .then((response) => {
-      // Ensure session is still valid - if not re-login 
-      if (response.result === "Invalid Session Key") {
-        dispatch(resetProfile())
-        redirect('/login')
-      }
-    })
-    .catch(error => {
-      alert("An error occured please try again or refresh the page")
-      console.log(error)
-    })
+    // dispatch(
+    //   recieveGroupMessages()
+    // )
+    // .unwrap()
+    // .then((response) => {
+    //   // Ensure session is still valid - if not re-login 
+    //   if (response.result === "Invalid Session Key") {
+    //     dispatch(resetProfile())
+    //     redirect('/login')
+    //   }
+    // })
+    // .catch(error => {
+    //   alert("An error occured please try again or refresh the page")
+    //   console.log(error)
+    // })
     
   
   }, [])
@@ -40,22 +40,45 @@ function Chat() {
   const onSendMessage = (e) => {
     e.preventDefault()
     dispatch(sendGroupMessage({message: messageInput}))
+    .unwrap()
+    .then(response => {
+
+    })
+    .catch(error => console.log(error))
+    setMessageInput("")
+    console.log("yip")
   }
 
   const displayMessages = () => {
-    messages.map((messageDetails) => {
-      return <Message sender={messageDetails.sender} message={messageDetails.message}/>
-    })
+    <Container className="">
+    </Container>
+    // messages.map((messageDetails) => {
+    //   return <Message sender={messageDetails.sender} message={messageDetails.message}/>
+    // })
   }
 
   const displayMessageBar = () => {
-
+    return (
+      <InputGroup className="my-3 w-75 m-auto border bg-secondary">
+        <FormControl
+          className='text-dark border-secondary rounded-0'
+          placeholder="Type your message here"
+          value={messageInput}
+          onChange={(e) => {setMessageInput(e.target.value)}}
+          aria-label="Type your message here"
+          aria-describedby="basic-addon2"
+        />
+        <Button varient="primary" className='' id="button-addon2 my-0" onClick={onSendMessage}>
+          Send
+        </Button>
+      </InputGroup>
+    )
   }
 
 
 
   return (
-    <Container fluid className='border-top border-bottom border-dark' style={{height: `${componentHeight}px`}}>
+    <Container fluid className='border-top border-dark' style={{height: `${componentHeight}px`}}>
       <Row className=' h-100'>
         <Col sm={3} xs={4} className='border-end border-dark p-0 m-0'>
         <h4 className='text-center mt-2'>Courses</h4>
@@ -65,8 +88,10 @@ function Chat() {
             <ListGroup.Item>INFO4444</ListGroup.Item>
           </ListGroup>
         </Col>
-        <Col className='border- p-0 m-0'>
-          {displayMessages()}
+        <Col className='my-3 h-75'>
+          <Container className='border h-100'>
+            {displayMessages()}
+          </Container>
           {displayMessageBar()}
         </Col>
       </Row>
