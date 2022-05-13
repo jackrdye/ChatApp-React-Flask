@@ -10,6 +10,8 @@ export function PostList(props) {
   const posts = useSelector(state => state.discussion.posts)
   const selectedPost = useSelector(state => state.discussion.currentPost.postID)
 
+  const [searchPost, setSearchPost] = useState("")
+
   const sortBy = props.sortBy
   const setSortBy = props.setSortBy // relevant || latest || earliest || upvotes
   const sortByDisplay = () => {
@@ -30,6 +32,13 @@ export function PostList(props) {
     setDisplayAskQuestion(false)
   }
 
+  const displayMatchingPosts = () => {
+    if (searchPost === "") {
+      return posts
+    }
+    return posts.filter(post => searchPost === post.title.slice(0, searchPost.length))
+  }
+
   return (
     <div>
       {/* SearchBar */}
@@ -37,6 +46,8 @@ export function PostList(props) {
           <FormControl
             className='text-dark'
             placeholder="Search for Post"
+            value={searchPost}
+            onChange={(e) => {setSearchPost(e.target.value)}}
             aria-label="Search for Post"
             aria-describedby="basic-addon2"
           />
@@ -66,7 +77,7 @@ export function PostList(props) {
 
       {/* DisplayList */}
       <ListGroup className='border-top rounded-0 border-dark overflow-auto'>
-        {posts.map(post => {
+        {displayMatchingPosts().map(post => {
           return <ListGroup.Item className='rounded-0' id={post.post_id} key={post.post_id} onClick={onClickPost} active={(selectedPost === post.post_id)}>{post.title}</ListGroup.Item>
         })}
       </ListGroup>

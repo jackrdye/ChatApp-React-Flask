@@ -53,7 +53,6 @@ function Chat() {
     })
     .catch(error => console.log(error))
     setMessageInput("")
-    console.log("yip")
   }
 
   const displayMessages = () => {

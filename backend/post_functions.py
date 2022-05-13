@@ -176,7 +176,25 @@ def create_comment(db, postID, parentCommentID, author, body):
     
     db.commit()
 
-    return {'result': 'success'}
+    sql_cmd = """
+        SELECT author, body, commentID, createdOn, parentCommentID
+        FROM Comments
+        WHERE author=:author and body=:body AND postID=:postID
+    """
+    resp = db.execute(sql_cmd, params={
+        'postID': postID, 
+        'author': author, 
+        'body': body})
+    comment = resp.fetchone()
+    comment_obj = {
+            'commentID': comment[2],
+            'parentCommentID': comment[4],
+            'author': comment[0],
+            'body': comment[1],
+            'createdOn': comment[3]
+        }
+
+    return {'result': 'success', 'comment': comment_obj}
 
 def get_post(db, postID):
     sql_cmd = f"""
@@ -207,6 +225,7 @@ def get_post(db, postID):
         SELECT commentID, parentCommentID, author, body, createdOn
         FROM Comments
         WHERE postID = :postID
+        ORDER BY createdOn DESC
     """
 
     resp = db.execute(sql_cmd, params={'postID': postID})
