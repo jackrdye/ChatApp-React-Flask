@@ -32,6 +32,24 @@ export function Post() {
           <Col>
             <Row><h5 className='fs-2'>{currentPost.title}</h5></Row>
             <Row><h6 className='fs-6'>{currentPost.author}</h6></Row>
+            <Row>
+          {/* Display Current Tags */}
+          <div className="d-flex pb-3">
+            {currentPost.tags.map((tag) => {
+              return (
+                <div key={tag} className='p-1 mx-1 '>
+                  {/* {tag}
+                  <CloseButton /> */}
+                  <InputGroup size="sm">
+                    <InputGroup.Text id='basic-addon1' className="bg-light text-dark rounded-pill">
+                      {tag}
+                    </InputGroup.Text>
+                  </InputGroup>
+                </div>
+              )
+            })}
+          </div>
+        </Row>
           </Col>
         </Row>
         <p className='my-4'>{currentPost.body}</p>

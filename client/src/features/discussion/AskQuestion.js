@@ -13,7 +13,6 @@ function AskQuestion(props) {
 
   const addTag = () => {
     setTags(tags => [...tags, tag])
-    setTag("")
   }
 
   const onSubmitPost = (e) => {
@@ -52,7 +51,6 @@ function AskQuestion(props) {
           onChange={(e) => setTag(e.target.value)}
           aria-label=""
           aria-describedby="basic-addon1"
-          onKeyDown={(e) => {if (e.key === "Enter") {addTag(tag)}}}
         />
         <InputGroup.Text id='basic-addon1' className="btn btn-outline-primary bi bi-plus-lg"/>
         </InputGroup>
@@ -65,7 +63,7 @@ function AskQuestion(props) {
             <div key={tag} className='p-1 mx-1 '>
               {/* {tag}
               <CloseButton /> */}
-              <InputGroup>
+              <InputGroup size="sm">
                 <InputGroup.Text id='basic-addon1' className="bg-light text-dark">
                   {tag}
                 </InputGroup.Text>

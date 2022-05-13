@@ -31,6 +31,18 @@ def get_tag_id(db, tag):
         return None
     return resp[0]
 
+def get_tag(db, tag_id):
+    sql_cmd = """
+        SELECT tag 
+        FROM Tags
+        WHERE tagID = :tag
+    """
+    resp = db.execute(sql_cmd, params={'tag': tag_id})
+    resp = resp.fetchone()
+    if resp == None:
+        return None
+    return resp[0]
+
 def create_tag_helper(db, tag):
     '''
         creates a tag
@@ -187,7 +199,8 @@ def get_post(db, postID):
         'body': resp[3],
         'createdOn': resp[4],
         'upvotes': resp[5],
-        'comments': []
+        'comments': [],
+        'tags': [],
     }
 
     sql_cmd = f"""
@@ -211,6 +224,24 @@ def get_post(db, postID):
         }
         post_obj['comments'].append(comment_obj)
     
+    sql_cmd = f"""
+        SELECT t.tag
+        FROM ( 
+            SELECT pt.tagID
+            FROM PostTags pt
+            WHERE pt.postID = :postID
+        ) tt
+        JOIN Tags t
+        ON t.tagID = tt.tagID
+    """
+
+    resp = db.execute(sql_cmd, params={'postID': postID})
+    if resp is None:
+        return {'result': 'failure'}
+    resp = resp.fetchall()
+    for tag in resp:
+        post_obj['tags'].append(tag[0])
+
     return {'result': 'success', 'post': post_obj}
 
 def upvote(db, postID):
