@@ -1,4 +1,5 @@
 import React from 'react'
+import "bootstrap-icons/font/bootstrap-icons.css";
 import { Button, Container, FormControl, InputGroup, ListGroup } from 'react-bootstrap'
 
 export function CourseTab(props) {
@@ -14,7 +15,7 @@ export function CourseTab(props) {
       {/* Course List */}
       <h4 className='text-center'>Courses</h4>
       <ListGroup>
-        <ListGroup.Item active className='border-primary rounded-0 bg-primary'>INFO2222</ListGroup.Item>
+        <ListGroup.Item active className='border-secondary rounded-0 bg-secondary'>INFO2222</ListGroup.Item>
         <ListGroup.Item>INFO3333</ListGroup.Item>
         <ListGroup.Item>INFO4444</ListGroup.Item>
       </ListGroup>
@@ -25,10 +26,10 @@ export function CourseTab(props) {
             placeholder="Enter tag"
             aria-label="Enter tag"
             aria-describedby="basic-addon2"
-            className='bg- rounded-3'
-          />
-          <InputGroup.Text id="basic-addon1">
-            <img src='/search-interface-symbol.png' className='' style={{width: "20px", height: "20px"}}/>
+            // className='bg- rounded-3'
+          /> 
+          <InputGroup.Text id='basic-addon1' className="btn btn-outline-primary bi bi-plus-lg">
+            {/* <img src='/search-interface-symbol.png' className='' style={{width: "20px", height: "20px"}}  alt=''/> */}
           </InputGroup.Text>
         </InputGroup>
       {/* Tag input */}

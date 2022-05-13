@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Dropdown, DropdownButton, FormControl, InputGroup, ListGroup, Form, Col} from 'react-bootstrap'
+import "bootstrap-icons/font/bootstrap-icons.css";
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchPostDetail } from './discussionSlice'
 
@@ -34,13 +35,13 @@ export function PostList(props) {
       {/* SearchBar */}
       <InputGroup className="w-100 p-2 m-auto">
           <FormControl
-            className='text-dark rounded-3'
+            className='text-dark'
             placeholder="Search for Post"
-            aria-label="Search for Posts"
+            aria-label="Search for Post"
             aria-describedby="basic-addon2"
           />
-          <InputGroup.Text id="basic-addon1">
-            <img src='/search-interface-symbol.png' className='' style={{width: "20px", height: "20px"}} alt=''/>
+          <InputGroup.Text id="basic-addon1" className='btn btn-outline-primary bi bi-search'>
+            {/* <img src='/search-interface-symbol.png' className='' style={{width: "20px", height: "20px"}} alt=''/> */}
           </InputGroup.Text>
         </InputGroup>
       {/* SortBy dropdown */}
