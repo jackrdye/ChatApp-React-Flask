@@ -30,7 +30,7 @@ def login(db, username, password):
     session_cookie = create_user_session(db, username)
     # print(session_cookie)
 
-    return {"result": "success", "session_cookie": session_cookie}
+    return {"result": "success", "session_cookie": session_cookie, "username": username}
 
 
 def register(db, username, password):

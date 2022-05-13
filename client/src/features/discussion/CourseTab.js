@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, FormControl, InputGroup, ListGroup } from 'react-bootstrap'
+import { Button, Container, FormControl, InputGroup, ListGroup } from 'react-bootstrap'
 
 export function CourseTab(props) {
   const setDisplayAskQuestion = props.setDisplayAskQuestion
@@ -8,7 +8,9 @@ export function CourseTab(props) {
   return (
     <>
       {/* Ask Question Button */}
-      <Button className='rounded-0 mb-5 w-100' onClick={() => setDisplayAskQuestion(true)}>Ask Question</Button>
+      <Container className="my-3">
+        <Button className='rounded-2 mb-5 w-100' onClick={() => setDisplayAskQuestion(true)}>Ask Question</Button>
+      </Container>
       {/* Course List */}
       <h4 className='text-center'>Courses</h4>
       <ListGroup>
@@ -18,13 +20,16 @@ export function CourseTab(props) {
       </ListGroup>
       {/* Tags to display */}
       <h6 className='text-center mt-5'>Tags</h6>
-      <InputGroup className="">
+      <InputGroup className="w-75 m-auto rounded-3">
           <FormControl
             placeholder="Enter tag"
             aria-label="Enter tag"
             aria-describedby="basic-addon2"
-            className='bg- rounded-0'
+            className='bg- rounded-3'
           />
+          <InputGroup.Text id="basic-addon1">
+            <img src='/search-interface-symbol.png' className='' style={{width: "20px", height: "20px"}}/>
+          </InputGroup.Text>
         </InputGroup>
       {/* Tag input */}
     </>

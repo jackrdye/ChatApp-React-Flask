@@ -56,7 +56,8 @@ export const discussionSlice = createSlice({
 
       .addCase(createPost.fulfilled, (state, action) => {
         if (action.payload.result === "success") {
-          state.posts.unshift({postID: action.payload.postID, title: action.payload.title})
+          console.log(action.payload)
+          state.posts.unshift({post_id: action.payload.postID, title: action.payload.title})
         }
       })
 

@@ -27,9 +27,10 @@ friend_functions.accept_friend_request(db, 'b', 'jack', 'accept')
 # message_functions.send_message(db, 'a', 'jack', 'Hey jack its a')
 # message_functions.get_messages(db, 'jack')
 account_functions.register(db, 'c', 'c')
-print(post_functions.create_post(db, "post 1", "jack", "this is a test from j", []))
-print(post_functions.create_post(db, "post 2", "haowen", "this is a test from h", []))
-print(post_functions.get_post_list(db, "relevant", []))
+post_functions.create_post(db, "post 1", "jack", "this is a test from j", [])
+post_functions.create_post(db, "post 2", "haowen", "this is a test from h", [])
+post_functions.get_post_list(db, "relevant", [])
+group_message_functions.send_message(db, "info2222", "a", "hey there jack")
 
 
 
