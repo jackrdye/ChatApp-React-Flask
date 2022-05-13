@@ -28,9 +28,7 @@ export function CourseTab(props) {
             aria-describedby="basic-addon2"
             // className='bg- rounded-3'
           /> 
-          <InputGroup.Text id='basic-addon1' className="btn btn-outline-primary bi bi-plus-lg">
-            {/* <img src='/search-interface-symbol.png' className='' style={{width: "20px", height: "20px"}}  alt=''/> */}
-          </InputGroup.Text>
+          <InputGroup.Text id='basic-addon1' className="btn btn-outline-primary bi bi-plus-lg"/>
         </InputGroup>
       {/* Tag input */}
     </>
