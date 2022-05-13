@@ -13,7 +13,7 @@ function Chat() {
   const redirect = useNavigate()
   const messages = useSelector(state => state.chat.messages)
 
-  const [componentHeight, setComponentHeight] = useState(window.innerHeight - 56)
+  const [componentHeight, setComponentHeight] = useState('calc(100vh - 56px)')
   const [messageInput, setMessageInput] = useState("")
 
   useEffect(() => {
@@ -64,9 +64,9 @@ function Chat() {
 
   const displayMessageBar = () => {
     return (
-      <InputGroup className="my-3 w-75 m-auto border bg-secondary">
+      <InputGroup className="my-3 w-75 m-auto rounded">
         <FormControl
-          className='text-dark border-secondary rounded-0'
+          className='text-dark border-secondary'
           placeholder="Type your message here"
           value={messageInput}
           onChange={(e) => {setMessageInput(e.target.value)}}
@@ -84,8 +84,8 @@ function Chat() {
 
 
   return (
-    <Container fluid className='border-top border-dark' style={{height: `${componentHeight}px`}}>
-      <Row className=' h-100'>
+    <Container fluid className='border-top border-dark' style={{height: `${componentHeight}`, maxHeight:`${componentHeight}`}}>
+      <Row className='h-100 mh-100'>
         <Col sm={3} xs={4} className='border-end border-dark p-0 m-0'>
         <h4 className='text-center mt-2'>Courses</h4>
           <ListGroup>
@@ -94,8 +94,8 @@ function Chat() {
             <ListGroup.Item>INFO4444</ListGroup.Item>
           </ListGroup>
         </Col>
-        <Col className='my-1 h-75 '>
-          <Container className=' h-100 px-3 py-1 mh-100 border overflow-auto'>
+        <Col className='my-1 h-100 mh-100'>
+          <Container className='my-1 h-75 px-3 py-1 mh-75 border overflow-auto'>
             {displayMessages()}
           </Container>
           {displayMessageBar()}
