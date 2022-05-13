@@ -62,6 +62,8 @@ def create_post(db, title, author, body, tags):
     """
     resp = db.execute(sql_cmd, params={'title': title, 'author': author, 'body': body})
 
+    db.commit()
+
     sql_cmd = """
         SELECT postID
         FROM Posts
@@ -73,7 +75,6 @@ def create_post(db, title, author, body, tags):
     resp = db.execute(sql_cmd, params={'title': title, 'author': author, 'body': body})
     if resp == None:
         return {'result': 'failure'}
-
 
     postID = resp.fetchone()[0]
 
@@ -172,10 +173,13 @@ def get_post(db, postID):
         WHERE postID = :postID
     """
     resp = db.execute(sql_cmd, params={'postID': postID})
-    resp = resp.fetchone()
     if resp is None:
         return {'result': 'failure'}
-    
+    resp = resp.fetchone()
+
+    if resp is None:
+        return {'result': 'failure'}
+
     post_obj = {
         'postID': resp[0], 
         'title': resp[1],

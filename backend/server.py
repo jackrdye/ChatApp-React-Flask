@@ -236,8 +236,9 @@ def get_group_messages():
         page = int(request.get_json()['page'])
     except:
         page = 1
-    print(page)
-    return group_message_functions.get_messages(t.db, user, group, page_no=page)
+    val =  group_message_functions.get_messages(t.db, user, group, page_no=page)
+    print(val)
+    return val
 
 
 
