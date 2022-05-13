@@ -22,7 +22,6 @@ export const sendGroupMessageAPI = async (messageDetails) => {
         body: JSON.stringify({group: "info2222", message: messageDetails.message})// {sortOrder: sortOrder, tags: tags}
       }
       ) 
-      console.log(response)
       return response.json()
 }
 
@@ -35,5 +34,5 @@ export const recieveGroupMessagesAPI = async (groupName) => {
         body: JSON.stringify({group: "info2222", page: 1}) 
       }
     );
-      return response.json();
+    return response.json();
 }

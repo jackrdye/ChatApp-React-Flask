@@ -18,7 +18,7 @@ def send_message(db, group, sender, message):
     db.execute(sql_cmd, params={'sender': sender, 'message': message, 'group': group })
     db.commit()
 
-    return {'result': 'success', 'sender': sender, 'message': message}
+    return {'result': 'success', 'sender': sender, 'message': message} #Can add {createdOn:...}
 
 def get_messages(db, user, group, page_no = 1):
     """

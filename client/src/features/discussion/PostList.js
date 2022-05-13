@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { FormControl, InputGroup, ListGroup, ListGroupItem } from 'react-bootstrap'
+import { Dropdown, DropdownButton, FormControl, InputGroup, ListGroup, ListGroupItem, SplitButton } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchPostDetail } from './discussionSlice'
 
@@ -30,8 +30,26 @@ export function PostList(props) {
           </InputGroup.Text>
         </InputGroup>
       {/* SortBy dropdown */}
+
+      <InputGroup className="m-auto w-75">
+        <InputGroup.Text>SortBy:</InputGroup.Text>
+
+        <DropdownButton
+          variant="outline-secondary"
+          title="Dropdown"
+          id="input-group-dropdown-2"
+          align="end"
+        >
+          <Dropdown.Item href="#">Action</Dropdown.Item>
+          <Dropdown.Item href="#">Another action</Dropdown.Item>
+          <Dropdown.Item href="#">Something else here</Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item href="#">Separated link</Dropdown.Item>
+        </DropdownButton>
+      </InputGroup>
+
       {/* DisplayList */}
-      <ListGroup className='border-top border-dark'>
+      <ListGroup className='border-top border-dark overflow-auto'>
         {posts.map(post => {
           return <ListGroup.Item className='rounded-0' id={post.post_id} key={post.post_id} onClick={onClickPost} active={(selectedPost === post.post_id)}>{post.title}</ListGroup.Item>
         })}

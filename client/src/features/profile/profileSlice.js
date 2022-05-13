@@ -9,7 +9,8 @@ if (initialState === null) {
   initialState = {
     isLoggedIn: false,
     isAdmin: false,
-    sessionKey: ""
+    sessionKey: "",
+    username: ""
   }
 } 
 
@@ -41,6 +42,8 @@ export const profileSlice = createSlice({
     resetProfile: (state) => {
       state.isLoggedIn = false
       state.isAdmin = false
+      state.username = ""
+      state.session_cookie = ""
       localStorage.setItem("profile", JSON.stringify(state))
       cookies.remove("session_key")
     }
@@ -54,6 +57,7 @@ export const profileSlice = createSlice({
         if (action.payload.result === "success") {
           state.isLoggedIn = true
           state.sessionKey = action.payload.session_cookie
+          state.username = action.payload.username
           cookies.set("session_key", action.payload.session_cookie)
         } 
         localStorage.setItem("profile", JSON.stringify(state))

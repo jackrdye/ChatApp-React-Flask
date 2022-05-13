@@ -53,15 +53,13 @@ export const chatSlice = createSlice({
       // })
       // Handle sendGroupMessage
       .addCase(sendGroupMessage.fulfilled, (state, action) => {
-        state.messages.push({sender: action.payload.sender, message: action.payload.message})
-        console.log(state.messages)
+        state.messages.push({sender: action.payload.sender, message: action.payload.message}) // Can add {createdOn: ...}
 
         // TODO: - Update correct group with new message 
       })
       // Handle recieveGroupMessage
       .addCase(recieveGroupMessages.fulfilled, (state, action) => {
-        state.messages.push(action.payload)
-        console.log(state.messages)
+        state.messages = action.payload.messages
         // TODO: - Update correct group with new messages
       })
           

@@ -16,6 +16,9 @@ function Chat() {
   const [componentHeight, setComponentHeight] = useState(window.innerHeight - 56)
   const [messageInput, setMessageInput] = useState("")
 
+  useEffect(() => {
+    console.log(messages)
+  }, [messages])
 
   useEffect(() => {
     dispatch(
@@ -42,7 +45,11 @@ function Chat() {
     dispatch(sendGroupMessage({message: messageInput}))
     .unwrap()
     .then(response => {
-
+      // Ensure session is still valid - if not re-login 
+      if (response.result === "Invalid Session Key") {
+        dispatch(resetProfile())
+        redirect('/login')
+      }
     })
     .catch(error => console.log(error))
     setMessageInput("")
@@ -50,11 +57,9 @@ function Chat() {
   }
 
   const displayMessages = () => {
-    <Container className="">
-    </Container>
-    // messages.map((messageDetails) => {
-    //   return <Message sender={messageDetails.sender} message={messageDetails.message}/>
-    // })
+    return messages.map((messageDetails) => {
+      return <Message key={messageDetails.message} sender={messageDetails.sender} message={messageDetails.message}/>
+    })
   }
 
   const displayMessageBar = () => {
@@ -67,6 +72,7 @@ function Chat() {
           onChange={(e) => {setMessageInput(e.target.value)}}
           aria-label="Type your message here"
           aria-describedby="basic-addon2"
+          onKeyDown={(e) => {if (e.key === "Enter") {onSendMessage(e)}}}
         />
         <Button varient="primary" className='' id="button-addon2 my-0" onClick={onSendMessage}>
           Send
@@ -88,8 +94,8 @@ function Chat() {
             <ListGroup.Item>INFO4444</ListGroup.Item>
           </ListGroup>
         </Col>
-        <Col className='my-3 h-75'>
-          <Container className='border h-100'>
+        <Col className='my-1 h-75 '>
+          <Container className=' h-100 px-3 py-1 mh-100 borde border-dark overflow-auto'>
             {displayMessages()}
           </Container>
           {displayMessageBar()}
