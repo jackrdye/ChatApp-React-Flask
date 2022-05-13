@@ -34,8 +34,8 @@ def get_messages(db, user, group, page_no = 1):
         FROM GroupMessages
         WHERE message_group = :group
         ORDER BY createdOn DESC
-        OFFSET :offset ROWS
         LIMIT 100
+        OFFSET :offset
     """
     resp = db.execute(sql_cmd, params={'group': group, 'offset': (page_no - 1) * 100})
     if resp == None:

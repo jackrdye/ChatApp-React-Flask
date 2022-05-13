@@ -1,5 +1,5 @@
-export const fetchAllChatsAPI = () => {
-  const response = fetch('/api/get_all_posts', {
+export const fetchAllChatsAPI = async () => {
+  const response = await fetch('/api/get_all_posts', {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -7,14 +7,14 @@ export const fetchAllChatsAPI = () => {
     body: JSON.stringify()// {sortOrder: sortOrder, tags: tags}
   }
   ) 
-    
+  
     // Validate [{postID, title}]
     
   return response.json()
 } 
 
-export const sendGroupMessageAPI = (messageDetails) => {
-    const response = fetch('/api/get_all_posts', {
+export const sendGroupMessageAPI = async (messageDetails) => {
+    const response = await fetch('/api/get_all_posts', {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -26,15 +26,14 @@ export const sendGroupMessageAPI = (messageDetails) => {
       return response.json()
 }
 
-export const recieveGroupMessagesAPI = (groupName) => {
-    const response = fetch('/api/get_group_messages', {
+export const recieveGroupMessagesAPI = async (groupName) => {
+    const response = await fetch('/api/get_group_messages', {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({group: "info2222", page: 1}) 
       }
-      ) 
-            
-      return response.json()
+    );
+      return response.json();
 }
