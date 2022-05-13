@@ -40,7 +40,7 @@ export function PostList(props) {
             aria-describedby="basic-addon2"
           />
           <InputGroup.Text id="basic-addon1">
-            <img src='/search-interface-symbol.png' className='' style={{width: "20px", height: "20px"}}/>
+            <img src='/search-interface-symbol.png' className='' style={{width: "20px", height: "20px"}} alt=''/>
           </InputGroup.Text>
         </InputGroup>
       {/* SortBy dropdown */}
