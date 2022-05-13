@@ -94,15 +94,15 @@ def get_post_list(db, sort_order, tags):
         gets all posts available, filtering by tags, in sort_order provided
     """
     SORT_ORDER = {
-        'relevant': 'relevance ASC, p.createdOn ASC', 
-        'latest': 'p.createdOn ASC', 
-        'earliest': 'p.createdOn DESC', 
-        'upvotes': 'p.upvotes ASC, p.createdOn ASC'
+        'relevant': 'relevance ASC, p.createdOn DESC', 
+        'latest': 'p.createdOn DESC', 
+        'earliest': 'p.createdOn ASC', 
+        'upvotes': 'p.upvotes ASC, p.createdOn DESC'
     }
     if sort_order in SORT_ORDER:
         sort_order = SORT_ORDER[sort_order]
     else:
-        sort_order = "p.createdOn ASC"
+        sort_order = "p.createdOn DESC"
     
     tagids = []
     for tag in tags:
