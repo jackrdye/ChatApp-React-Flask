@@ -15,7 +15,9 @@ function AskQuestion(props) {
   const [body, setBody] = useState("")
 
   const addTag = () => {
-    setTags(tags => [...tags, tag])
+    if (!tags.includes(tag)) {
+      setTags(tags => [...tags, tag])
+    }
     setTag("")
   }
 
@@ -80,7 +82,7 @@ function AskQuestion(props) {
         </div>
       </InputGroup>
       {/* Display Current Tags */}
-      <div className="d-flex">
+      <div className="d-flex flex-wrap">
         {tags.map((tag) => {
           return (
             <div key={tag} className='p-1 mx-1 pt-4'>

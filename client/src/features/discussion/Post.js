@@ -49,7 +49,9 @@ export function Post(props) {
               <Button onClick={() => {dispatch(upvotePost(currentPost.postID))}} className='btn btn-success bi bi-hand-thumbs-up rounded-0 rounded-top'></Button>
             </Row>
             <Row className='row'>
-              <InputGroup.Text className='bg bg-white rounded-0'>{currentPost.upvotes}</InputGroup.Text>
+              <InputGroup.Text className='bg bg-white rounded-0 text-center'>
+                <div className='mx-auto'>{currentPost.upvotes}</div>
+              </InputGroup.Text>
             </Row>
             <Row className='row'>
               <Button onClick={() => {dispatch(downvotePost(currentPost.postID))}} className='btn btn-danger bi bi-hand-thumbs-down rounded-0 rounded-bottom'></Button>
@@ -97,14 +99,14 @@ export function Post(props) {
 
   if (currentPost.title === undefined) {
     return (
-      <div className='overflow-auto m-0 p-0' style={{maxHeight:`${componentHeight - 3}px`}}>
+      <div className='overflow-auto m-0 p-0' style={{maxHeight:`calc(${componentHeight} - 3px)`}}>
         <h4 className='text-center mt-5'>Click a post on the left to display</h4>
       </div>
     )
   }
   else {
     return (
-      <div className='overflow-auto m-0 p-0' style={{maxHeight:`${componentHeight - 3}px`}}>
+      <div className='overflow-auto m-0 p-0' style={{maxHeight:`calc(${componentHeight} - 3px)`}}>
         {displayPost()}
         
         <hr/>

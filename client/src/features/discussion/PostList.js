@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Dropdown, DropdownButton, FormControl, InputGroup, ListGroup, Form, Col} from 'react-bootstrap'
+import { FormControl, InputGroup, ListGroup, Form, Col } from 'react-bootstrap'
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchPostDetail } from './discussionSlice'
@@ -57,7 +57,7 @@ export function PostList(props) {
         </InputGroup>
 
       {/* SortBy dropdown */}
-      <InputGroup className="p-2 w-100 float-right" align="end">
+      <InputGroup className="pt-2 ps-2 pe-2 w-100 float-right" align="end">
         <Col className='my-auto'>
         <p className='m-auto me-3'>Sort by:</p>
         </Col>
@@ -74,9 +74,11 @@ export function PostList(props) {
         </Form.Select>
         </Col>
       </InputGroup>
+      
+      <hr/>
 
       {/* DisplayList */}
-      <ListGroup className='border-top rounded-0 border-dark overflow-auto'>
+      <ListGroup className='rounded-0 overflow-auto'>
         {displayMatchingPosts().map(post => {
           return <ListGroup.Item className='rounded-0' id={post.post_id} key={post.post_id} onClick={onClickPost} active={(selectedPost === post.post_id)}>{post.title}</ListGroup.Item>
         })}

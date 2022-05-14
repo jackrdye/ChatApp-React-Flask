@@ -14,7 +14,7 @@ import AskQuestion from './AskQuestion'
 function Discussion() {
   const dispatch = useDispatch()
   const redirect = useNavigate()
-  const [componentHeight, setComponentHeight] = useState(window.innerHeight - 56)
+  const [componentHeight, setComponentHeight] = useState('calc(100vh - 56px)')
 
   const discussion = useSelector(state => state.discussion)
   const currentPost = useSelector(state => state.discussion.currentPost)
@@ -53,12 +53,12 @@ function Discussion() {
 
 
   return (
-    <Container fluid className='border-top border-dark' style={{height: `${componentHeight}px`, maxHeight:`${componentHeight}px`}}> {/*style={{height: `${componentHeight}px`}}*/}
+    <Container fluid className='border-top border-secondary' style={{height: `${componentHeight}`, maxHeight:`${componentHeight}`}}> {/*style={{height: `${componentHeight}px`}}*/}
       <Row className=' h-100'>
-        <Col sm={2} xs={2} className='border-end border-dark p-0 m-0'>
+        <Col sm={2} xs={2} className='border-end border-secondary p-0 m-0'>
           <CourseTab setDisplayAskQuestion={setDisplayAskQuestion}/>
         </Col>
-        <Col sm={3} xs={3} className='border-end border-dark p-0 m-0'>
+        <Col sm={3} xs={3} className='border-end border-secondary p-0 m-0'>
           <PostList sortBy={sortBy} setSortBy={setSortBy} setDisplayAskQuestion={setDisplayAskQuestion}/>
         </Col>
         <Col className="border">
