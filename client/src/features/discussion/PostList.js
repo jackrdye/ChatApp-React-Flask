@@ -36,25 +36,28 @@ export function PostList(props) {
     if (searchPost === "") {
       return posts
     }
-    return posts.filter(post => searchPost === post.title.slice(0, searchPost.length))
+    return posts.filter(post => post.title.includes(searchPost))
   }
 
   return (
     <div>
       {/* SearchBar */}
       <InputGroup className="w-100 p-2 m-auto">
-          {/* <i className='fa fa-search'></i> */}
-          <FormControl
-            className='text-dark'
-            placeholder="Search for Post"
-            value={searchPost}
-            onChange={(e) => {setSearchPost(e.target.value)}}
-            aria-label="Search for Post"
-            aria-describedby="basic-addon2"
-          />
-          {/* <InputGroup.Text id="basic-addon1" className='btn btn-outline-primary'>
-          </InputGroup.Text> */}
-        </InputGroup>
+        <InputGroup.Text id="basic-addon1" 
+        className='bg-white border-left-0 bi bi-search mr-0 pr-0'
+        style={{borderRight: 0}}>
+        </InputGroup.Text>
+        <FormControl
+          className='text-dark ml-0 pl-0'
+          placeholder="Search for Post"
+          value={searchPost}
+          onChange={(e) => {setSearchPost(e.target.value)}}
+          aria-label="Search for Post"
+          aria-describedby="basic-addon2"
+          style={{borderLeft: 0}}
+        />
+          
+      </InputGroup>
 
       {/* SortBy dropdown */}
       <InputGroup className="pt-2 ps-2 pe-2 w-100 float-right" align="end">
