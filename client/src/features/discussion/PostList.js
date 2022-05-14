@@ -43,6 +43,7 @@ export function PostList(props) {
     <div>
       {/* SearchBar */}
       <InputGroup className="w-100 p-2 m-auto">
+          {/* <i className='fa fa-search'></i> */}
           <FormControl
             className='text-dark'
             placeholder="Search for Post"
@@ -51,9 +52,8 @@ export function PostList(props) {
             aria-label="Search for Post"
             aria-describedby="basic-addon2"
           />
-          <InputGroup.Text id="basic-addon1" className='btn btn-outline-primary bi bi-search'>
-            {/* <img src='/search-interface-symbol.png' className='' style={{width: "20px", height: "20px"}} alt=''/> */}
-          </InputGroup.Text>
+          {/* <InputGroup.Text id="basic-addon1" className='btn btn-outline-primary'>
+          </InputGroup.Text> */}
         </InputGroup>
 
       {/* SortBy dropdown */}

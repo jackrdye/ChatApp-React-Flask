@@ -9,8 +9,8 @@ export function CourseTab(props) {
   const [tags, setTags] = useState([])
 
   const addTag = () => {
-    if (!tags.includes(tag)) {
-      setTags(tags => [...tags, tag])
+    if (!tags.includes(tag.trim()) && tag.trim() !== '') {
+      setTags(tags => [...tags, tag.trim()])
     }
     setTag("")
   }
@@ -32,7 +32,7 @@ export function CourseTab(props) {
       <h6 className='text-center mt-5'>Tags</h6>
       <InputGroup className="w-75 m-auto rounded-3">
           <FormControl
-            placeholder="Enter tag"
+            placeholder="Enter tag to filter" 
             aria-label="Enter tag"
             aria-describedby="basic-addon2"
             // className='bg- rounded-3'
@@ -46,9 +46,10 @@ export function CourseTab(props) {
             }
           /> 
           <InputGroup.Text id='basic-addon1' 
-          className="btn btn-outline-primary bi bi-plus-lg"
-          onClick={(e) => addTag(tag)}/>
-        </InputGroup>
+          className="btn btn-outline-primary"
+          onClick={(e) => addTag(tag)}
+          >Add Tag</InputGroup.Text>
+          </InputGroup>
       {/* Tag input */}
       {/* Display Current Tags */}
       <Container className="d-flex flex-wrap">

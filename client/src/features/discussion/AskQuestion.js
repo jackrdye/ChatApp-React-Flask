@@ -15,8 +15,8 @@ function AskQuestion(props) {
   const [body, setBody] = useState("")
 
   const addTag = () => {
-    if (!tags.includes(tag)) {
-      setTags(tags => [...tags, tag])
+    if (!tags.includes(tag.trim()) && tag.trim() !== '') {
+      setTags(tags => [...tags, tag.trim()])
     }
     setTag("")
   }
@@ -75,9 +75,10 @@ function AskQuestion(props) {
         />
         <InputGroup.Text 
           id='basic-addon1' 
-          className="btn btn-outline-primary bi bi-plus-lg" 
+          className="btn btn-outline-primary" 
           onClick={(e) => addTag(tag)}
-        />
+        >Add Tag</InputGroup.Text>
+  
         </InputGroup>
         </div>
       </InputGroup>
